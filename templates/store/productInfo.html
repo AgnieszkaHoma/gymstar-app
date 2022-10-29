@@ -1,0 +1,22 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+<br>
+<div class="card">
+<div class="container">
+    <img src="{{product.image.url}}" alt="">
+    <div class="col" style="display: inline-block;">
+        <strong><h4>{{product.name}}</h4></strong>
+        <small>In stock: {{product.stock}} items</small>
+        <h5>{{product.price}}$</h5>
+        <input type="submit" value="Add to cart" class="btn btn-primary"><br><br>
+        <button type="button" class="btn btn-primary"><i class="fa-regular fa-heart"></i> Add to wishlist</button>
+
+        
+    </div>
+</div>
+</div>
+  <br>   
+
+{%endblock%}

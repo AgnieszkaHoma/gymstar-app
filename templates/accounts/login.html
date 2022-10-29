@@ -1,0 +1,46 @@
+{%extends 'base.html'%} 
+{% load static %}
+
+{%block content%}
+<div class="register-box" style="width: 360px;
+    height: 620px;
+    margin: auto;
+    background-color: white;
+    border-radius: 3px;">
+    <h3>Login here</h3>
+    
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+            <div class="field-holder">
+                <label style=" 
+                display: flex;
+                margin-top: 10px;
+                font-size: 16px;"
+                >Email</label>
+                <input type="email" name="email" placeholder="Enter your email address">
+            </div>
+        </div>                              
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="field-holder">
+                        <label style=" 
+                        display: flex;
+                        margin-top: 10px;
+                        font-size: 16px;">Password</label>
+                        <input type="password" name="password" placeholder="Enter your password">
+                    </div>
+                </div>
+                <input type="submit" value="Submit" style="
+                    width: 189px;
+                    height: 42px;
+                    margin-top: 15px;
+                    border: none;
+                    background-color: rgb(219, 123, 45);
+                    color: white;
+                    font-size: 16px;
+                ">
+                <p>You don't have an account? <a href="{% url 'register' %}" style="text-decoration: underline;">Sign Up</a></p>
+               
+    </form>
+</div>
+{%endblock%}
