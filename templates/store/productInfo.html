@@ -3,20 +3,69 @@
 
 {%block content%}
 <br>
-<div class="card">
-<div class="container">
-    <img src="{{product.image.url}}" alt="">
-    <div class="col" style="display: inline-block;">
-        <strong><h4>{{product.name}}</h4></strong>
-        <small>In stock: {{product.stock}} items</small>
-        <h5>{{product.price}}$</h5>
-        <input type="submit" value="Add to cart" class="btn btn-primary"><br><br>
-        <button type="button" class="btn btn-primary"><i class="fa-regular fa-heart"></i> Add to wishlist</button>
 
-        
+<div class="container">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{product.image.url}}" style="max-height: 70vh; max-width:100%" alt="">
     </div>
+    <div class="col" style="display: inline-block;">
+      <div class="description" style="margin-left: 10px;">
+        <strong>
+          <h1>{{product.name}}</h1>
+        </strong>
+        {%if product.stock >= 1 %}
+        <small style="color: grey;">Available</small>
+        <h5>{{product.price}}$</h5><br>
+        {{product.description}}<br><br>
+        <input type="submit" value="Add to cart" class="btn btn-primary">
+        <button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-heart"></i></button>
+        {%else %}
+        <small>Out of stock</small>
+        <h5>{{product.price}}$</h5><br>
+        {{product.description}}<br><br>
+        <button type="button" class="btn btn-danger" disabled>Out of stock</button>
+        {%endif%}
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{product.image.url}}" style="max-height: 70vh; max-width:100%" class="img-fluid rounded-start" />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <strong>
+            <h1>{{product.name}}</h1>
+          </strong>
+          {%if product.stock >= 1 %}
+          <small>Available</small>
+          <h5>{{product.price}}$</h5><br>
+          <input type="submit" value="Add to cart" class="btn btn-primary">
+          <button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-heart"></i></button>
+          {%else %}
+          <small>Out of stock</small>
+          <h5>{{product.price}}$</h5>
+          <button type="button" class="btn btn-danger" disabled>Out of stock</button>
+          {%endif%}
+          <p class="card-text">
+            This is a wider card with supporting text below as a natural lead-in to
+            additional content. This content is a little bit longer.
+          </p>
+          <p class="card-text">
+            <small class="text-muted">Last updated 3 mins ago</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
 </div>
-</div>
-  <br>   
+
+<br>
 
 {%endblock%}

@@ -6,6 +6,9 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=250, unique=True)
     
+    def get_absolute_url(self):
+      return reverse('categoriesTypes', args=[self.slug])
+   
     def __str__(self):
       return self.name 
     
@@ -15,6 +18,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits = 6, decimal_places = 2)
     slug = models.SlugField(max_length=250, unique=True)
     stock = models.IntegerField()
+    is_product_available = models.BooleanField(default=True)
     image = models.ImageField(upload_to='products/product_image')
     description = models.TextField()
     price = models.DecimalField(max_digits = 6, decimal_places = 2)

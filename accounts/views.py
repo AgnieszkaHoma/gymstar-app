@@ -67,3 +67,7 @@ def logout(request):
 @login_required(login_url='login')
 def settings(request):
     return render(request, 'accounts/settings.html')
+
+@login_required(login_url='login')
+def ordersHistory(request):
+    return render(request, 'accounts/ordersHistory.html')

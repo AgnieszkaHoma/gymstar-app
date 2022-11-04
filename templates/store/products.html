@@ -1,14 +1,15 @@
 {% extends 'base.html'%}
 {%load static%}
 
-{%block content%}
-<br><p style="float: right; margin-right: 25px;">We have found {{products.count}} items. </p>
-{%for product in products %}
+{% comment %} {%block content%}
 
+<br><p>We have found {{products.count}} items. </p><hr>
+{%for product in products %}
 <div class="container">
+
     
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <!-- Card -->
 <div class="card">
 
@@ -46,7 +47,9 @@
           </svg> (0)
         <br>
         <small>3 days delivery</small>
-      </small>
+        </small>
+      <br>
+      <a href="{{ product.get_absolute_url }}" class="btn btn-block btn-primary">See product</a>
     </div>
   
   </div>
@@ -57,6 +60,120 @@
 
 {%endfor%}
 
+{%endblock%} {% endcomment %}
+
+{%block content%}
+
+
+{% comment %} <div class="container">
+  
+  <div class="row">
+    
+    <p>We have found {{products.count}} items.</p><hr>
+    
+      {% if not products %}
+      <div class="col">There are currently no products active.</div>
+        {% else %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for product in products %}
+        <div class="col-lg-4 d-flex align-items-stretch">
+          <div class="card border-1">          
+            <a href="{{ product.get_absolute_url }}"><img class="card-img-top" style="height: auto; width: 100%;
+            height: 15vw;
+            object-fit: cover;" alt="Responsive image" src="{{ product.image.url }}"></a>      
+            <div class="card-body px-1">
+              <p class="card-text">
+                <a class="text-dark text-decoration-none"
+                  href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+              </p>
+              <div class="fw-bold">{{product.price}}$</div>
+            </div>
+            
+              <small style="padding: 5px;">3 days delivery</small>
+               
+              
+            <a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:10rem;  display: block; margin: 0 auto; margin-top: 10px; ">Check product</a><br>
+         
+          </div>
+          
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+<br> {% endcomment %}
+
+<div class="page-section account-header buyer-logged-in">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <!-- Load the sidebar here -->
+              <br><br>
+              <h4><strong>Filter</strong></h4><br>
+             
+              <div class="d-flex flex-column flex-shrink-0 " style="width: 100px;">               
+                <ul class="nav nav-flush flex-column mb-auto text-center">
+                    <li> 
+                      <a href="#" class="nav-link py-3"  style="color: grey;"> <i class="fa-solid fa-gauge"></i><small>Kategorie</small></a> 
+                    <div class="category-filter border-bottom">
+                      {%for category in categories%}
+                      <a href="#" style="float: left; padding-left:5px;">{{category.name}}</a><br>
+                      {%endfor%}
+                    </div>
+                    </li>
+                    <li> <a href="{% url 'ordersHistory' %}" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-clock-rotate-left"></i> <small>Rozmiar</small> </a> </li>
+                    <li> <a href="#" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-file"></i> <small>Cena</small> </a> </li>                   
+                </ul>
+            </div>
+          </div>
+          <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+              <div class="user-dashboard loader-holder">
+                  <div class="user-holder">
+                      
+                    <br><p>We have found {{products.count}} items.</p><hr><br>
+    
+                    {% if not products %}
+                    <div class="col">There are currently no products active.</div>
+                      {% else %}
+                      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                      {% for product in products %}
+                      <div class="col-lg-4 d-flex align-items-stretch">
+                        <div class="card border-1">          
+                          <a href="{{ product.get_absolute_url }}"><img class="card-img-top" style="height: auto; max-width: 100%;
+                          height: 15vw;
+                          object-fit: cover;" alt="Responsive image" src="{{ product.image.url }}"></a>      
+                          <div class="card-body px-1">
+                            <p class="card-text">
+                              <a class="text-dark text-decoration-none"
+                                href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                            </p>
+                            <div class="fw-bold">{{product.price}}$</div>
+                          </div>
+                          
+                            <small style="padding: 5px;">3 days delivery</small>
+                             
+                            
+                          <a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:10rem;  display: block; margin: 0 auto; ">Check product</a><br>
+                       
+                        </div>
+                        
+                      </div>
+                      {% endfor %}
+                    </div>
+                    {% endif %}
+
+                      
+                      
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<br>
+<!-- Main Section End -->
 
 
 {%endblock%}
