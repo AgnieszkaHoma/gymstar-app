@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/settings', views.settings, name='settings'),
     path('profile/ordersHistory', views.ordersHistory, name='ordersHistory'),
+    path('profile/myDetails', views.myDetails, name='myDetails'),
 ]

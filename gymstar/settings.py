@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'fontawesomefree',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

@@ -3,21 +3,19 @@ from .models import *
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
 
+
 # Create your views here.
 
-def allProducts(request, category_slug=None):
-    if category_slug != None:
-        categories = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=categories)
-    else:
-        products = Product.objects.all().order_by('-published_at')
-        categories = Category.objects.all()
+def allProducts(request):
+    products = Product.objects.filter(is_product_available=True).order_by('-published_at')
+    categories = Category.objects.all()
         
     context = {
         'products': products,
         'categories': categories,
     }
     return render(request, 'store/products.html', context)
+
 
 def productInfo(request, slug):
     product = Product.objects.get(slug=slug)
@@ -38,3 +36,4 @@ class Search(ListView):
             query = ""
             
         return Product.objects.filter(name__icontains=query).order_by('-published_at')
+

@@ -5,22 +5,23 @@
 <br>
 
 <div class="container">
-  <div class="row g-0">
+  <div class="row">
     <div class="col-md-4">
       <img src="{{product.image.url}}" style="max-height: 70vh; max-width:100%" alt="">
     </div>
     <div class="col" style="display: inline-block;">
-      <div class="description" style="margin-left: 10px;">
+      <div class="text-uppercase">
         <strong>
-          <h1>{{product.name}}</h1>
+          <h2>{{product.name}}</h2>
         </strong>
-        {%if product.stock >= 1 %}
+      </div>
+        {%if product.stock >= 1%}
         <small style="color: grey;">Available</small>
         <h5>{{product.price}}$</h5><br>
         {{product.description}}<br><br>
         <input type="submit" value="Add to cart" class="btn btn-primary">
         <button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-heart"></i></button>
-        {%else %}
+        {%else%}
         <small>Out of stock</small>
         <h5>{{product.price}}$</h5><br>
         {{product.description}}<br><br>

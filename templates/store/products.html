@@ -64,6 +64,11 @@
 
 {%block content%}
 
+<style>
+  select:focus{
+    outline:none;
+  }
+</style>
 
 {% comment %} <div class="container">
   
@@ -112,19 +117,14 @@
               <br><br>
               <h4><strong>Filter</strong></h4><br>
              
-              <div class="d-flex flex-column flex-shrink-0 " style="width: 100px;">               
-                <ul class="nav nav-flush flex-column mb-auto text-center">
-                    <li> 
-                      <a href="#" class="nav-link py-3"  style="color: grey;"> <i class="fa-solid fa-gauge"></i><small>Kategorie</small></a> 
-                    <div class="category-filter border-bottom">
+              <div class="d-flex flex-column flex-shrink-0 " style="width: 150px;">               
+ 
+                      <div class="nav-link py-2"style="text-align: center;"><strong>Category</strong></div> 
+                    <div class="list-group">
                       {%for category in categories%}
-                      <a href="#" style="float: left; padding-left:5px;">{{category.name}}</a><br>
+                      <a href="#" class="list-group-item list-group-item-action">{{category.name}}</a>
                       {%endfor%}
-                    </div>
-                    </li>
-                    <li> <a href="{% url 'ordersHistory' %}" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-clock-rotate-left"></i> <small>Rozmiar</small> </a> </li>
-                    <li> <a href="#" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-file"></i> <small>Cena</small> </a> </li>                   
-                </ul>
+                    </div>             
             </div>
           </div>
           <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
@@ -139,10 +139,10 @@
                       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                       {% for product in products %}
                       <div class="col-lg-4 d-flex align-items-stretch">
-                        <div class="card border-1">          
-                          <a href="{{ product.get_absolute_url }}"><img class="card-img-top" style="height: auto; max-width: 100%;
+                        <div class="mb-4 border-1">          
+                          <a href="{{ product.get_absolute_url }}"><img class="img-responsive" style="height: auto; max-width: 100%;
                           height: 15vw;
-                          object-fit: cover;" alt="Responsive image" src="{{ product.image.url }}"></a>      
+                          object-fit: cover; margin-top: 5px;" alt="Responsive image" src="{{ product.image.url }}"></a>      
                           <div class="card-body px-1">
                             <p class="card-text">
                               <a class="text-dark text-decoration-none"

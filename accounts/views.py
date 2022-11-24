@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from .forms import RegisterUserForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import RegisterUserForm, UserProfileForm
 from django.contrib import messages, auth
 from .models import User, UserProfile
 from django.contrib.auth.decorators import login_required
@@ -71,3 +71,23 @@ def settings(request):
 @login_required(login_url='login')
 def ordersHistory(request):
     return render(request, 'accounts/ordersHistory.html')
+
+@login_required(login_url='login')
+def myDetails(request):
+    profile = get_object_or_404(UserProfile, user=request.user)   
+    
+    if request.method == 'POST':
+        profile_form = UserProfileForm(request.POST, instance=profile)
+        if profile_form.is_valid():
+            profile_form.save()
+            return redirect('profile')
+        else:
+            print(profile_form.errors)
+    else:  
+        profile_form = UserProfileForm(instance = profile)
+    
+    context = {
+        'profile_form': profile_form,
+        'profile': profile,
+    }
+    return render(request, 'accounts/myDetails.html', context)
