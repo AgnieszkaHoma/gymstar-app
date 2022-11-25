@@ -1,9 +1,16 @@
 {% extends 'base.html'%}
 {%load static%}
 
+
 {%block content%}
 
-<div class="page-section account-header buyer-logged-in">
+<style>
+  select:focus{
+    outline:none;
+  }
+</style>
+
+<div class="page-section account-header user-logged-in">
   <div class="container">
       <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
@@ -11,59 +18,77 @@
               <br><br>
               <h4><strong>Filter</strong></h4><br>
              
-              <div class="d-flex flex-column flex-shrink-0 " style="width: 100px;">               
-                <ul class="nav nav-flush flex-column mb-auto text-center">
-                    <li> 
-                      <a href="#" class="nav-link py-3"  style="color: grey;"> <i class="fa-solid fa-gauge"></i><small>Kategorie</small></a> 
-                    <div class="category-filter border-bottom">
+              <div class="d-flex flex-column flex-shrink-0 " style="width: 150px;">               
+ <ul>
+                <div class="sidebar-widget"> 
+                  <h4 class="sidebar-title">Category</h4></div><br>
+                      <div class="list-group">
+                      <a href="{% url 'products' %}" class="list-group-item list-group-item-action">All</a>                  
                       {%for category in categories%}
-                      <a href="#" style="float: left; padding-left:5px;">{{category.name}}</a><br>
+                      <a href="?categoryID={{category.id}}" class="list-group-item list-group-item-action">{{category.name}}</a>
                       {%endfor%}
+                    </div>          
+                    
+                    <div class="sidebar-widget mt-8">
+                      <h4 class="sidebar-title">Price Filter</h4><br>
+                      <div class="price-filter">
+                        <div class="price-slider-amount">
+                          {%for p_filter in price_filter%}
+                          <li><a href="#" class="selected-price">{{p_filter.price}}</a></li>
+                          {%endfor%}
+                        </div>
+                      </div>
                     </div>
-                    </li>
-                    <li> <a href="{% url 'ordersHistory' %}" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-clock-rotate-left"></i> <small>Rozmiar</small> </a> </li>
-                    <li> <a href="#" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-file"></i> <small>Cena</small> </a> </li>                   
-                </ul>
+
+                    <div class="sidebar-widget mt-8">
+                      <h4 class="sidebar-title">Color</h4><br>
+                      <div class="sidebar-widget-color">
+                        <div class="d-flex flex-wrap">
+                          {%for i in color%}
+                          <li><a href="?colorID={{i.id}}" class="colors" style="background-color: {{i.name}}; width: 34px;
+                            height: 34px; border-radius: 50%; border: 1px solid; margin-right: 5px;">col</a></li>
+                          {%endfor%}
+                        </div>
+                      </div>
+                    </div>
             </div>
           </div>
+        </ul>
           <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
               <div class="user-dashboard loader-holder">
-                  <div class="user-holder">
-                      
+                  <div class="user-holder">                  
                     <br><p>We have found {{searchedProduct.count}} items.</p><hr><br>
     
                     {% if not searchedProduct %}
                     <div class="col">Sorry, we didn't find this product</div>
                       {% else %}
                       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                      {% for product in searchedProduct %}
-                      <div class="col-lg-4 d-flex align-items-stretch">
-                        <div class="card border-1">          
-                          <a href="{{ product.get_absolute_url }}"><img class="card-img-top" style="height: auto; max-width: 100%;
-                          height: 15vw;
-                          object-fit: cover;" alt="Responsive image" src="{{ product.image.url }}"></a>      
-                          <div class="card-body px-1">
-                            <p class="card-text">
-                              <a class="text-dark text-decoration-none"
-                                href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                            </p>
-                            <div class="fw-bold">{{product.price}}$</div>
+                        {% for product in searchedProduct %}
+                        <div class="col-lg-4 d-flex align-items-stretch">
+                          <div class="mb-4 border-1">          
+                            <a href="{{ product.get_absolute_url }}"><img class="img-responsive" style="height: auto; max-width: 100%;
+                            height: 15vw;
+                            object-fit: cover; margin-top: 5px;" alt="Responsive image" src="{{ product.image.url }}"></a>      
+                            <div class="card-body px-1">
+                              <p class="card-text">
+                                <a class="text-dark text-decoration-none"
+                                  href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                              </p>
+                              <div class="fw-bold">{{product.price}}$</div>
+                            </div>
+                            
+                              <small style="padding: 5px;">3 days delivery</small>
+                               
+                              
+                            <a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:10rem;  display: block; margin: 0 auto; ">Check product</a><br>
+                         
                           </div>
                           
-                            <small style="padding: 5px;">3 days delivery</small>
-                             
-                            
-                          <a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:10rem;  display: block; margin: 0 auto; ">Check product</a><br>
-                       
                         </div>
-                        
-                      </div>
-                      {% endfor %}
+                        {% endfor %}
                     </div>
                     {% endif %}
-
-                      
-                      
+                  
                   </div>
               </div>
           </div>

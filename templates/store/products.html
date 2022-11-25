@@ -109,32 +109,93 @@
   </div>
 <br> {% endcomment %}
 
-<div class="page-section account-header buyer-logged-in">
+<div class="page-section account-header user-logged-in">
   <div class="container">
       <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <!-- Load the sidebar here -->
               <br><br>
               <h4><strong>Filter</strong></h4><br>
-             
               <div class="d-flex flex-column flex-shrink-0 " style="width: 150px;">               
- 
-                      <div class="nav-link py-2"style="text-align: center;"><strong>Category</strong></div> 
-                    <div class="list-group">
+ <ul>
+                <div class="sidebar-widget"> 
+                  <h4 class="sidebar-title">Category</h4></div><br>
+                      <div class="category-widget">
+                      <a href="{% url 'products' %}" class="selected-category">All</a><br>                  
                       {%for category in categories%}
-                      <a href="#" class="list-group-item list-group-item-action">{{category.name}}</a>
+                      <a href="/store/products/?category={{category.id}}" class="selected-category">{{category.name}}</a><br>
                       {%endfor%}
-                    </div>             
+                    </div>          
+                    
+                    <div class="sidebar-widget mt-8">
+                      <h4 class="sidebar-title">Price Filter</h4><br>
+                      <div class="price-filter">
+                        <div class="price-select">
+                          {%for p_filter in price_filter%}
+                          <li><a href="/store/products/?price_filter={{p_filter.id}}" class="selected-price">{{p_filter.price}}</a></li>
+                          {%endfor%}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="sidebar-widget mt-8">
+                      <h4 class="sidebar-title">Brands</h4><br>
+                      <div class="sidebar-widget">
+                        <div class="brand-select">
+                          {%for brands in brand %}
+                          <a href="?brandID={{brands.id}}" class="selected-brand" style="display: inline;">{{brands.name}}<br></a>
+                          {%endfor%}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="sidebar-widget mt-8">
+                      <h4 class="sidebar-title">Size</h4><br>
+                      <div class="sidebar-widget">
+                        <div class="size-select">
+                          {%for s in size %}
+                          <a href="?sizeID={{s.id}}" class="selected-size;">{{s.name}}<br></a>
+                          {%endfor%}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="sidebar-widget mt-8">
+                      <h4 class="sidebar-title">Color</h4><br>
+                      <div class="color-select">
+                        <div class="d-flex flex-wrap">
+                          {%for i in color%}
+                          <li><a href="?colorID={{i.id}}" class="colors" style="background-color: {{i.code}};   margin: 5px;
+                            display: inline-block;
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            border: 1px solid grey;"></a></li>
+                          {%endfor%}
+                        </div>
+                      </div>
+                    </div>
             </div>
           </div>
+        </ul>
           <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
               <div class="user-dashboard loader-holder">
                   <div class="user-holder">
-                      
+
                     <br><p>We have found {{products.count}} items.</p><hr><br>
+                    
+                    <div class="header-bottom-set-dropdown" style="float: right;">
+                      <button class="dropdown-toggle header-action-btn" data-bs-toggle="dropdown">Sort by</button>
+                      <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a class="dropdown-item" href="/store/products/{% for i in products %}?LOWTOHIGH= {{i.id}} {% endfor %}">Price, Low to High</a></li>
+                        <li><a class="dropdown-item" href="/store/products/{% for i in products %}?HIGHTOLOW= {{i.id}} {% endfor %}">Price, High to Low</a></li>
+                        <li><a class="dropdown-item" href="/store/products/{% for i in products %}?ATOZ= {{i.id}} {% endfor %}">Name, A to Z</a></li>
+                        <li><a class="dropdown-item" href="/store/products/{% for i in products %}?ZTOA= {{i.id}} {% endfor %}">Name, Z to A</a></li>
+                      </ul>
+                    </div>
     
                     {% if not products %}
-                    <div class="col">There are currently no products active.</div>
+                    <div class="col">There are currently no products to show.</div>
                       {% else %}
                       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                       {% for product in products %}

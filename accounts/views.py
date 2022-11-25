@@ -19,8 +19,9 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
-            user.save()
-
+            user.save()         
+            return render(request, 'accounts/login.html')
+        
         else:
             print('invalid form')
             print(form.errors)

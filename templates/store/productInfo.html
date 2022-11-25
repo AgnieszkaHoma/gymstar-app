@@ -19,15 +19,25 @@
         <small style="color: grey;">Available</small>
         <h5>{{product.price}}$</h5><br>
         {{product.description}}<br><br>
+
+        <div class="btn-group-toggle" data-toggle="buttons">Size:<br>
+          <label class="btn btn-secondary active">
+            <input type="checkbox" checked autocomplete="off">{{product.size}}
+          </label><br><br>
+        </div>
+
         <input type="submit" value="Add to cart" class="btn btn-primary">
         <button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-heart"></i></button>
+
+
+        
         {%else%}
         <small>Out of stock</small>
         <h5>{{product.price}}$</h5><br>
         {{product.description}}<br><br>
         <button type="button" class="btn btn-danger" disabled>Out of stock</button>
         {%endif%}
-
+      
       </div>
     </div>
 

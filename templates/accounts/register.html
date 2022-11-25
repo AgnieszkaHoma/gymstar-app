@@ -2,6 +2,15 @@
 {%load static%}
 
 {%block content%}
+
+<style>
+    input,textarea 
+    { border-radius: 1rem !important;
+        border: 1px solid;
+        height: 35px;
+        width: 200px;
+        background-color: white;}
+</style>
 <div class="register-box" style="width: 360px;
     height: 620px;
     margin: auto;
@@ -61,16 +70,17 @@
                     </div>
                 </div>
                 <input type="submit" value="Submit" style="
-                    width: 189px;
-                    height: 42px;
+                    width: 200px;
+                    height: 35px;
                     margin-top: 15px;
                     border: none;
                     background-color: rgb(219, 123, 45);
                     color: white;
                     font-size: 16px;
+                    margin-left: 15px;
                 ">
                 <p>Already have an account? <a href="{% url 'login' %}" style="text-decoration: underline;">Sign In</a></p>
-               
+            
     </form>
 </div>
 {%endblock%}

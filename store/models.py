@@ -1,24 +1,66 @@
 from django.db import models
 from django.urls import reverse 
+from django.utils.text import slugify
 
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=250, unique=True)
+    # slug = models.SlugField(max_length=250, unique=True)
     
-    def get_absolute_url(self):
-      return reverse('categoriesTypes', args=[self.slug])
+    # def get_absolute_url(self):
+    #   return reverse('categoriesTypes', args=[self.slug])
    
+    class Meta:
+      verbose_name_plural = 'Categories'
+      
     def __str__(self):
       return self.name 
+  
+class Brand(models.Model):
+    name = models.CharField(max_length=100)
     
+    def __str__(self):
+      return self.name   
+    
+class Size(models.Model):
+    name = models.CharField(max_length=100)
+    
+    def __str__(self):
+      return self.name    
+    
+class Color(models.Model):
+    name = models.CharField(max_length=100)
+    code = models.CharField(max_length=100)
+    
+    def __str__(self):
+      return self.name  
+class Price_Filter(models.Model):
+    PRICE_FILTER = (
+      ('0 to 50', '0 to 50'),
+      ('50 to 100', '50 to 100'),
+      ('100 to 150', '100 to 150'),
+      ('150 to 200', '150 to 200'),
+      ('200 to 250', '200 to 250'),
+      ('250 to 500', '250 to 500'),
+    )
+    price = models.CharField(choices=PRICE_FILTER, max_length=50)
+    
+    def __str__(self):
+      return self.price  
+      
 class Product(models.Model):
+
+    
     name = models.CharField(max_length=100) 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE, null=True, blank=True)
+    size = models.ForeignKey(Size, on_delete=models.CASCADE, null=True, blank=True)
+    price_filter = models.ForeignKey(Price_Filter, on_delete=models.CASCADE, null=True, blank=True)
     price = models.DecimalField(max_digits = 6, decimal_places = 2)
     slug = models.SlugField(max_length=250, unique=True)
     stock = models.IntegerField()
-    is_product_available = models.BooleanField(default=True)
+    is_available = models.BooleanField(default=True)
     image = models.ImageField(upload_to='products/product_image')
     description = models.TextField()
     price = models.DecimalField(max_digits = 6, decimal_places = 2)
@@ -32,5 +74,8 @@ class Product(models.Model):
        return reverse('productInfo', args=[self.slug])
        
     def __str__(self):
-      return self.name
+      return self.name 
     
+    def save(self, *args, **kwargs):
+      self.slug = slugify(self.name)
+      super(Product, self).save(*args, **kwargs)
