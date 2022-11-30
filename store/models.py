@@ -1,21 +1,21 @@
 from django.db import models
 from django.urls import reverse 
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    # slug = models.SlugField(max_length=250, unique=True)
+    slug = models.SlugField(max_length=250, unique=True)
     
-    # def get_absolute_url(self):
-    #   return reverse('categoriesTypes', args=[self.slug])
-   
     class Meta:
       verbose_name_plural = 'Categories'
       
     def __str__(self):
       return self.name 
   
+    def get_absolute_url(self):
+      return reverse('category_list', args=[self.slug])
 class Brand(models.Model):
     name = models.CharField(max_length=100)
     
@@ -52,7 +52,7 @@ class Product(models.Model):
 
     
     name = models.CharField(max_length=100) 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name= 'product',on_delete=models.CASCADE, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)
     color = models.ForeignKey(Color, on_delete=models.CASCADE, null=True, blank=True)
     size = models.ForeignKey(Size, on_delete=models.CASCADE, null=True, blank=True)
@@ -62,7 +62,8 @@ class Product(models.Model):
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
     image = models.ImageField(upload_to='products/product_image')
-    description = models.TextField()
+    description = RichTextField(blank=True, null=True)
+    # description = models.TextField()
     price = models.DecimalField(max_digits = 6, decimal_places = 2)
     published_at = models.DateTimeField(auto_now_add = True)
     modified_at = models.DateTimeField(auto_now = True)

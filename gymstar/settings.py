@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'store',
+    'cart',
     'fontawesomefree',
     'django_filters',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.views.categories',
             ],
         },
     },

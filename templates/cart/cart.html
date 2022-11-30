@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+<span class="border">
+<div class="container">
+    <section class="h-100 h-custom border-1" style="background-color: #e3e3e6; border-radius: 25px;">
+        <div class="container py-4 h-100">
+            <div class="container">
+            SHOPPING CART
+            </div>
+            {%for product in products%}
+            {{product.name}} <br>
+            {%endfor%}
+        </div>
+    </section>
+
+</div>
+</span>
+{%endblock%}

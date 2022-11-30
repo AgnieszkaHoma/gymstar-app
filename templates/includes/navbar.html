@@ -7,6 +7,7 @@
     .box .search-box {
       position: relative;
       height: 50px;
+      width: 300px;
       max-width: 390px;
       margin: auto;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
@@ -54,8 +55,23 @@
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="#">Calculators</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Exercises</a>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <a class="dropdown-item" href="{% url 'products' %}">All</a>
+                </li>
+
+                {% for categories in all_categories %}
+                <li>
+                  <a class="dropdown-item" href="{{categories.get_absolute_url}}" style="font-color: grey;">{{categories.name| capfirst}}</a>
+                </li>
+                {% endfor %}
+
+              </ul>
             </li>         
   
             <li class="nav-item">
@@ -63,6 +79,7 @@
             </li>
           </ul>
   
+
           <form  action="{% url 'search' %}" method="get">
           <div class="box">
             <div class="search-box">
@@ -75,36 +92,68 @@
           </div>
         </div>
       </form>
-      
+
   
           {%if user.is_authenticated %}
           <ul class="navbar-nav form-inline ml-3 my-2 my-lg-0">   
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-heart" style="        
-                padding-top: 10px; margin:auto;">></i>
-              </a>  
-            </li>     
+
+              <a type="button" role="button" href="#" style=" color: grey; padding: 15px;"> 
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                  &nbsp;           
+              </a>
+
+          </li>   
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping" style="        
-                padding: 10px;"></i>
-              </a>  
-            </li>
-          <li class="nav-item">
-              <p style="margin-top: 8px; font-size: 13px; color: grey;">Welcome, {{user.first_name}}!</p>
-              <a href="{% url 'profile' %}" style="float: left; margin-left: 16px; text-decoration: none; color: grey;">My Account</a>
+
+              <a type="button" role="button" href="#" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 
+                  <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"> </i>
+                  &nbsp;
+                  <div id="cart-qty" class="d-inline-flex">
+                      {% with qty_amount=cart|length %}
+                       
+                          {% if qty_amount > 0 %}
+                      
+                              {{ qty_amount }}
+                              {% else %}
+                                  0
+                          {% endif %}
+                      {% endwith %}
+                  </div>             
+              </a>
+
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}" style="margin-top: 8px;"><i class="fa-solid fa-right-from-bracket"></i></a>
+              <p style="margin-top: 8px; font-size: 13px; color: grey;">Welcome, {{user.first_name}}!</p>
+              <a href="{% url 'profile' %}" style="float: left; margin-left: 16px; text-decoration: none; color: grey; margin-top: -15px;">My Account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}" style="margin-top: 8px;"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
           </li>
           </ul>
           {%else%}
           <ul class="navbar-nav form-inline ml-3 my-2 my-lg-0">
+            
             <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping" style="
-                border-radius: 50%;
-                border: 1px solid grey;
-                padding: 10px;"></i></a>  
+
+              <a type="button" role="button" href="#" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 
+                  <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"> </i>
+                  &nbsp;
+                  <div id="cart-qty" class="d-inline-flex">
+                      {% with qty_amount=cart|length %}
+                       
+                          {% if qty_amount > 0 %}
+                      
+                              {{ qty_amount }}
+                              {% else %}
+                                  0
+                          {% endif %}
+                      {% endwith %}
+                  </div>             
+              </a>
+
           </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'login' %}" style="margin-top: 8px;">Sign In</a>  
             </li>

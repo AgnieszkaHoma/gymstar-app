@@ -2,9 +2,26 @@ from django.shortcuts import render
 from .models import *
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 
 # Create your views here.
+def categories(request):
+    all_categories = Category.objects.all()
+    return {'all_categories': all_categories}
+
+def category_list(request, slug=None):
+    category = get_object_or_404(Category, slug=slug)   
+     
+    products = Product.objects.filter(category=category)
+    
+    context = {
+        'category': category,
+        'products': products,
+    }
+    
+    return render(request, 'store/category_list.html', context)
+
 
 def allProducts(request):
     products = Product.objects.filter(is_available=True).order_by('-published_at')
@@ -58,7 +75,7 @@ def allProducts(request):
 
 
 def productInfo(request, slug):
-    product = Product.objects.get(slug=slug)
+    product = get_object_or_404(Product, slug=slug)
     context = {
         'product': product
     }
