@@ -20,7 +20,7 @@ def category_list(request, slug=None):
         'products': products,
     }
     
-    return render(request, 'store/category_list.html', context)
+    return render(request, 'store/category-search.html', context)
 
 
 def allProducts(request):

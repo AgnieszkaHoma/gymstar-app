@@ -106,10 +106,10 @@
           </li>   
             <li class="nav-item">
 
-              <a type="button" role="button" href="#" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 
+              <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 
                   <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"> </i>
                   &nbsp;
-                  <div id="cart-qty" class="d-inline-flex">
+                  <div id="cart-quantity" class="d-inline-flex">
                       {% with qty_amount=cart|length %}
                        
                           {% if qty_amount > 0 %}
@@ -127,6 +127,7 @@
               <p style="margin-top: 8px; font-size: 13px; color: grey;">Welcome, {{user.first_name}}!</p>
               <a href="{% url 'profile' %}" style="float: left; margin-left: 16px; text-decoration: none; color: grey; margin-top: -15px;">My Account</a>
           </li>
+          &nbsp;
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}" style="margin-top: 8px;"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
           </li>
@@ -136,10 +137,10 @@
             
             <li class="nav-item">
 
-              <a type="button" role="button" href="#" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 
+              <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 
                   <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"> </i>
                   &nbsp;
-                  <div id="cart-qty" class="d-inline-flex">
+                  <div id="cart-quantity" class="d-inline-flex">
                       {% with qty_amount=cart|length %}
                        
                           {% if qty_amount > 0 %}

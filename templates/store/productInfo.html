@@ -41,7 +41,7 @@
                   </select><br>
 
    
-        <button type="button" id="add-button" value="{{product.id}}" class="btn btn-secondary">          
+        <button type="button" id="add-to-cart-button" value="{{product.id}}" class="btn btn-secondary">          
           <i class="fa fa-cart-plus fa-lg" aria-hidden="true"></i> Add to cart</button>  
           
           <button type="button" id="wishlist-button" value="{{product.id}}" class="btn btn-outline-danger">          
@@ -64,5 +64,39 @@
 </div>
 
 <br>
+
+<script>
+
+$(document).on('click', '#add-to-cart-button', function(e){
+  e.preventDefault();
+
+  $.ajax({
+
+    type: 'POST',
+    url: '{% url 'add_to_cart' %}', 
+    data: {
+
+          product_id: $('#add-to-cart-button').val(),
+          prod_quantity: $('#select option:selected').text(),
+          csrfmiddlewaretoken: "{{csrf_token}}",
+          action: 'post'
+    },
+
+    success: function(json){
+      
+          //console.log(json)
+
+          document.getElementById("cart-quantity").textContent = json.qty
+    },
+
+    error: function(xhr, errmsg, err){
+
+    }
+  });
+})
+
+</script>
+
+
 
 {%endblock%}
