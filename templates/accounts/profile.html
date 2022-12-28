@@ -9,7 +9,19 @@
         <br><br>
         {% include 'includes/customerSidebar.html' %}				
     </div>
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <br/><br/>
+        <h4>Hello, {{user.first_name}}! We are happy to see you!</h4><br>
+        <div class="card" style="width: 25rem; ">
+            <div class="card-body">
+              <p class="card-text"><strong>Logged as</strong>: {{user.username}}<br>
+                <strong>Email</strong>: {{user.email}}
+              </p>
+            </div>
+          </div>
+    </div>
 </div>
 </div>
+
 
 {%endblock%}

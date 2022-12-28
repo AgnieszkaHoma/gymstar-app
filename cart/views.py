@@ -10,7 +10,6 @@ from .utils import Cart
 
 # Create your views here.
 
-@login_required(login_url='login')
 def cart(request):
     cart = Cart(request)
     context = {
@@ -35,14 +34,37 @@ def add_to_cart(request):
         return response
 
 def remove_from_cart(request):
-    pass
+    cart = Cart(request)
+    
+    if request.POST.get('action') == 'post':
+        product_id = int(request.POST.get('product_id')) 
+        
+        cart.delete(product=product_id)
+        
+        cart_amount_qty = cart.__len__()
+        
+        cart_total_amount = cart.total_amount()
+        
+        response = JsonResponse({'qty': cart_amount_qty, 'total_am': cart_total_amount})
+        
+        return response
 
 def update_cart(request):
-    pass
-
-
-
-
+    cart = Cart(request)
+    
+    if request.POST.get('action') == 'post':
+        product_id = int(request.POST.get('product_id')) 
+        prod_quantity = int(request.POST.get('prod_quantity'))
+        
+        cart.update(product=product_id, qty = prod_quantity)
+        
+        cart_amount_qty = cart.__len__()
+        
+        cart_total_amount = cart.total_amount()
+        
+        response = JsonResponse({'qty': cart_amount_qty, 'total_am': cart_total_amount})
+        
+        return response
 
 
 # def add(request):

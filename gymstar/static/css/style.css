@@ -3,46 +3,6 @@
 	font-size: 16px;
 }
 
-/* Slider */
-.carousel-item {
-	height: 70vh;
-	min-height: 300px;
-	background: no-repeat scroll center scroll;
-	-webkit-backdrop-size: cover;
-	background-size: cover;
-}
-.carousel-item::before {
-	content: '';
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background: rgb(20, 20, 20);
-	opacity: 0.7;
-}
-.carousel-caption {
-	bottom: 170px;
-	padding-left: 100px;
-	padding-right: 100px;
-}
-.carousel-caption h5 {
-	font-size: 70px;
-	font-weight: 600;
-}
-.carousel-caption p {
-	font-size: 18px;
-}
-.slider-btn .btn {
-	background-color: rgb(230, 76, 29);
-	color: white;
-	border-radius: 5;
-	padding: 1rem 2rem;
-	font-size: 1rem;
-	margin-right: 15px;
-}
-
 .card {
 	display: flex;
 	flex-wrap: wrap;
@@ -51,7 +11,6 @@
 .nav-link {
 	border-radius: 0px !important;
 	transition: all 0.5s;
-	width: 100px;
 	display: flex;
 	flex-direction: column;
 	line-height: 1;
@@ -66,3 +25,9 @@
 	background-color: #52525240 !important;
 }
 
+input,textarea 
+    { border-radius: 1rem !important;
+        border: 1px solid;
+        height: 35px;
+        width: 500px;
+        background-color: white;}

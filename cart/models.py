@@ -28,26 +28,6 @@ class Payment(models.Model):
     def __str__(self):
         return self.payment_id
     
-class Cart(models.Model):
-    cart_id = models.CharField(max_length=250, blank=True)
-    add_date = models.DateField(auto_now_add=True)
-
-    def __str__(self):
-        return self.cart_id
-    
-class OrderItem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    cart    = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
-    quantity = models.IntegerField()
-    discount = models.FloatField(Discount, null=True, blank=True)
-
-    def get_raw_total_item_price(self) -> Decimal:
-        return self.product.price * self.quantity
-
-    def __unicode__(self):
-        return self.product
-
 class Order(models.Model):
     STATUS = (
         ('New', 'New'),

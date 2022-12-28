@@ -3,6 +3,7 @@ from .models import *
 from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from datetime import datetime
 
 
 # Create your views here.
@@ -76,6 +77,10 @@ def allProducts(request):
 
 def productInfo(request, slug):
     product = get_object_or_404(Product, slug=slug)
+    product.visits = product.visits + 1
+    product.recent_visits = datetime.now()
+    product.save()
+    
     context = {
         'product': product
     }

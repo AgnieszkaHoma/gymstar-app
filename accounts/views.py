@@ -19,8 +19,9 @@ def register(request):
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
             user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
-            user.save()         
-            return render(request, 'accounts/login.html')
+            user.save()    
+            messages.success(request, 'Registration successful! Log in.')     
+            return redirect('register')
         
         else:
             print('invalid form')
@@ -43,7 +44,6 @@ def profile(request):
 
 def login(request):
     if request.user.is_authenticated:
-        messages.warning(request, 'You are already logged in!')
         return redirect('profile')
     elif request.method == 'POST':
         email = request.POST['email']
@@ -53,10 +53,9 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request, 'You are now logged in.')
             return redirect('home')
         else:
-            messages.error(request, 'Invalid login credentials')
+            messages.error(request, 'Invalid credentials, try again.')
             return redirect('login')
     return render(request, 'accounts/login.html')
 

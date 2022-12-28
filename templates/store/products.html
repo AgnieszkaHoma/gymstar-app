@@ -117,64 +117,67 @@
               <br><br>
               <h4><strong>Filter</strong></h4><br>
               <div class="d-flex flex-column flex-shrink-0 " style="width: 150px;">               
- <ul>
+
+  <div class="frame">
                 <div class="sidebar-widget"> 
-                  <h5 class="sidebar-title">Category</h5></div><br>
+                  
+                  <h5 class="sidebar-title border-bottom">Category</h5></div>
                       <div class="category-widget">
-                      <a href="{% url 'products' %}" class="selected-category">All</a><br>                  
+                      <a href="{% url 'products' %}" class="selected-category" style="color:#2B2A2A; ">All</a><br>                  
                       {%for category in categories%}
-                      <a href="/store/products/?category={{category.id}}" class="selected-category">{{category.name}}</a><br>
+                      <a href="/store/products/?category={{category.id}}" class="selected-category" style="color:#2B2A2A; ">{{category.name}}</a><br>
                       {%endfor%}
                     </div>          
                     
                     <div class="sidebar-widget mt-8">
-                      <h5 class="sidebar-title">Price Filter</h5><br>
+                      <h5 class="sidebar-title border-bottom">Price Filter</h5>
                       <div class="price-filter">
                         <div class="price-select">
                           {%for p_filter in price_filter%}
-                          <li><a href="/store/products/?price_filter={{p_filter.id}}" class="selected-price">{{p_filter.price}}</a></li>
+                          <a href="/store/products/?price_filter={{p_filter.id}}" class="selected-price" style="color:#2B2A2A; ">{{p_filter.price}}</a><br>
                           {%endfor%}
                         </div>
                       </div>
                     </div>
 
                     <div class="sidebar-widget mt-8">
-                      <h5 class="sidebar-title">Brands</h5><br>
+                      <h5 class="sidebar-title border-bottom">Brands</h5>
                       <div class="sidebar-widget">
                         <div class="brand-select">
                           {%for brands in brand %}
-                          <a href="?brandID={{brands.id}}" class="selected-brand" style="display: inline;">{{brands.name}}<br></a>
+                          <a href="?brandID={{brands.id}}" class="selected-brand" style="display: inline; color: #2B2A2A;">{{brands.name}}<br></a>
                           {%endfor%}
                         </div>
                       </div>
                     </div>
 
                     <div class="sidebar-widget mt-8">
-                      <h5 class="sidebar-title">Size</h5><br>
+                      <h5 class="sidebar-title border-bottom">Size</h5>
                       <div class="sidebar-widget">
                         <div class="size-select">
                           {%for s in size %}
-                          <a href="?sizeID={{s.id}}" class="selected-size;">{{s.name}}<br></a>
+                          <a href="?sizeID={{s.id}}" class="selected-size;" style="color:#2B2A2A; ">{{s.name}}<br></a>
                           {%endfor%}
                         </div>
                       </div>
                     </div>
 
                     <div class="sidebar-widget mt-8">
-                      <h5 class="sidebar-title">Color</h5><br>
+                      <h5 class="sidebar-title border-bottom">Color</h5>
                       <div class="color-select">
                         <div class="d-flex flex-wrap">
                           {%for i in color%}
-                          <li><a href="?colorID={{i.id}}" class="colors" style="background-color: {{i.code}};   margin: 5px;
+                          <a href="?colorID={{i.id}}" class="colors" style="background-color: {{i.code}};   margin: 5px;
                             display: inline-block;
                             width: 20px;
                             height: 20px;
                             border-radius: 50%;
-                            border: 1px solid grey;"></a></li>
+                            border: 1px solid grey;"></a>
                           {%endfor%}
                         </div>
                       </div>
                     </div>
+                  </div>
             </div>
           </div>
         </ul>
@@ -198,7 +201,7 @@
                       <button class="dropdown-toggle header-action-btn" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Sort by
                       </button>
-                      <ul class="dropdown-menu dropdown-menu-right">
+                      <ul class="dropdown-menu dropdown-menu-right" style="border: 1px solid #ccc;">
                         <li><a class="dropdown-item" href="/store/products/{% for i in products %}?LOWTOHIGH= {{i.id}} {% endfor %}">Price, Low to High</a></li>
                         <li><a class="dropdown-item" href="/store/products/{% for i in products %}?HIGHTOLOW= {{i.id}} {% endfor %}">Price, High to Low</a></li>
                         <li><a class="dropdown-item" href="/store/products/{% for i in products %}?ATOZ= {{i.id}} {% endfor %}">Name, A to Z</a></li>

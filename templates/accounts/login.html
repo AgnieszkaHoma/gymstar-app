@@ -1,6 +1,6 @@
 {%extends 'base.html'%} 
 {% load static %}
-
+{% load crispy_forms_tags %}
 {%block content%}
 <style>
 input,textarea 
@@ -9,6 +9,11 @@ input,textarea
     height: 35px;
     width: 200px;
     background-color: white;}
+
+    .notification-info2 {
+        position: absolute; 
+        bottom: 100%; 
+    }
 </style>
 <div class="register-box" style="width: 360px;
     height: 620px;
@@ -43,12 +48,26 @@ input,textarea
                     height: 35px;
                     margin-top: 15px;
                     border: none;
-                    background-color: rgb(219, 123, 45);
+                    background-color: #901F93;
                     color: white;
                     font-size: 16px;
                     margin-left: 15px;
                 ">
                 <p>You don't have an account? <a href="{% url 'register' %}" style="text-decoration: underline;">Sign Up</a></p>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        {% if messages %} 
+                            {% for message in messages %}
+                                <div class="alert alert-{{message.tags}} notification-info2 center-block" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>{{message}}</strong>
+                                </div>
+                            {% endfor %} 
+                        {% endif %}
+                    </div>
+                </div>
                
     </form>
 </div>

@@ -18,6 +18,7 @@ class RegisterUserForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Password does not match!"
             )
+    
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile

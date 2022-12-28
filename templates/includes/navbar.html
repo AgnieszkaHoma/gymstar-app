@@ -29,22 +29,23 @@
       right: -1px;
       top: 0;
       width: 50px;
-      background: rgb(219, 98, 28);
+      background: black;
       height: 100%;
       text-align: center;
       line-height: 50px;
       color: white;
       font-size: 19px;
       border-radius:0 25px 25px 0;
-    }
-    
+    }   
   </style>
-  
-  <nav class="navbar navbar-expand-lg bg-white">
+  <div class="fast-info" style="background: rgb(171,47,186);
+  background: linear-gradient(90deg, rgba(171,47,186,0.9037990196078431) 0%, rgba(203,92,196,1) 35%, rgba(126,29,203,1) 100%); height: 30px; font-size: 16px; color: white; font-weight: bold; letter-spacing: 1px;"><center>OFF10 - DISCOUNT COUPON!</center></div>
+  <div class="container">
+  <nav class="navbar navbar-expand-lg bg-white" style="box-shadow: none;">
       <div class="container-fluid">
         <div class="logo">
         <a href="{% url 'home' %}">
-          <img src="{% static 'images/gym.png' %}" alt="" style="max-width:100px;">
+          <img src="{% static 'images/logoc.png' %}" alt="" style="max-width:100px; margin-right: 30px; margin-bottom:5px;">
         </a>
       </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +59,7 @@
 
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Categories
+                Categories 
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
@@ -75,7 +76,7 @@
             </li>         
   
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'products' %}">Shop</a>
+              <a class="nav-link" href="{% url 'products' %}"> Shop</a>
             </li>
           </ul>
   
@@ -86,7 +87,7 @@
             <input type="text" name="q" placeholder="Search">
             <a href = "{% url 'search'%}">
             <label for="" class="icon">
-              <button><i class="fa-solid fa-magnifying-glass"></i></button>
+              <button><i class="fa-solid fa-magnifying-glass" style="color: white;"></i></button>
             </label>
           </a>
           </div>
@@ -98,16 +99,11 @@
           <ul class="navbar-nav form-inline ml-3 my-2 my-lg-0">   
             <li class="nav-item">
 
-              <a type="button" role="button" href="#" style=" color: grey; padding: 15px;"> 
-                <i class="fa fa-heart" aria-hidden="true"></i>
-                  &nbsp;           
-              </a>
-
           </li>   
             <li class="nav-item">
 
               <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 
-                  <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"> </i>
+                <i class="fa fa-shopping-bag fa-lg" aria-hidden="true"></i>
                   &nbsp;
                   <div id="cart-quantity" class="d-inline-flex">
                       {% with qty_amount=cart|length %}
@@ -124,12 +120,14 @@
 
           </li>
           <li class="nav-item">
-              <p style="margin-top: 8px; font-size: 13px; color: grey;">Welcome, {{user.first_name}}!</p>
-              <a href="{% url 'profile' %}" style="float: left; margin-left: 16px; text-decoration: none; color: grey; margin-top: -15px;">My Account</a>
+            <div class="account">
+              <center><a href="{% url 'profile' %}" style="text-decoration: none; color: grey; padding:10px;"><i class="fa fa-user" aria-hidden="true"></i></a></center>
+            </div>
           </li>
           &nbsp;
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'logout' %}" style="margin-top: 8px;"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+          <li class="nav-item" style="padding: 5px 20px;">
+
+            <a href="{% url 'logout' %}" style="margin-top: 8px; color: grey;"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
           </li>
           </ul>
           {%else%}
@@ -156,16 +154,17 @@
           </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}" style="margin-top: 8px;">Sign In</a>  
+                <a class="nav-link" href="{% url 'login' %}">Sign In</a> 
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'register' %}"style="margin-top: 8px;">Sign Up</a>
+                <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
             </li>
             </ul>
             {%endif%}
         </div>
       </div>
-    
+    </div>    
     </nav>
+    <br>
   
 
