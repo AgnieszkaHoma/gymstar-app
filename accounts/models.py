@@ -68,8 +68,10 @@ class User(AbstractBaseUser):
         return True
     
 class UserProfile(models.Model):
+    name = models.CharField(max_length=200, blank=True, null=True)
+    surname = models.CharField(max_length=200, blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
-    profile_avatar = models.ImageField(upload_to='users/profile_avatar', blank=True, null=True)
+    email = models.EmailField(max_length=200, null=True)
     street = models.CharField(max_length=50, blank=True, null=True)
     country = models.CharField(max_length=50, blank=True, null=True)
     state = models.CharField(max_length=50, blank=True, null=True)
@@ -78,7 +80,5 @@ class UserProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     
-    def __str__(self):
-        return self.user.email
     
        

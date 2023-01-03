@@ -11,6 +11,13 @@ class CustomModelUserAdmin(UserAdmin):
     list_filter = ()
     fieldsets = ()
     
+class CustomModelUserProfileAdmin(UserAdmin):
+    list_display = ('name', 'surname', 'street', 'city', 'state', 'country', 'pin_code')
+    ordering = ('-created_at',)
+    filter_horizontal = ()
+    list_filter = ()
+    fieldsets = ()
+    
 
 admin.site.register(User, CustomModelUserAdmin)
-admin.site.register(UserProfile)
+admin.site.register(UserProfile, CustomModelUserProfileAdmin)

@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from datetime import datetime
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -13,7 +14,6 @@ def categories(request):
 
 def category_list(request, slug=None):
     category = get_object_or_404(Category, slug=slug)   
-     
     products = Product.objects.filter(category=category)
     
     context = {
@@ -31,7 +31,12 @@ def allProducts(request):
     color = Color.objects.all()
     brand = Brand.objects.all()
     size = Size.objects.all()
-        
+     
+    p = Paginator(Product.objects.filter(is_available=True).order_by('-published_at'), 9) 
+    page = request.GET.get('page')
+    product_page = p.get_page(page)
+    nums = "c" * product_page.paginator.num_pages
+         
     ColorID = request.GET.get('colorID')
     CategoryID = request.GET.get('category')
     PriceFilterID = request.GET.get('price_filter') 
@@ -71,6 +76,8 @@ def allProducts(request):
         'color': color, 
         'size': size,
         'brand': brand,
+        'product_page': product_page,
+        'nums': nums,
     }
     return render(request, 'store/products.html', context)
 

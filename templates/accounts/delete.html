@@ -1,0 +1,31 @@
+{%extends 'base.html' %}
+{%load static%}
+{%block content%}
+<div class="container">
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">	
+        <!-- Load the sidebar here -->		
+        <br><br>
+        {% include 'includes/customerSidebar.html' %}				
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+        <br/><br/>
+<div class="col">
+        
+    <div class="card" style="width: 30rem; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; ">
+        <div class="card-body">
+            <form method="POST" autocomplete="off"> 
+                {% csrf_token %}
+                <center><h5>Are you sure?</h5>
+                    <img src="{% static 'images/pngegg.png' %}" style="max-width: 100px;"><br>
+                <button type="submit" class="btn btn-danger">Yes, Delete</button></center>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
+
+{%endblock%}

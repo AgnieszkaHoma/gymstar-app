@@ -1,7 +1,8 @@
 <div class="d-flex flex-column flex-shrink-0 bg-light" style="width: 100px;">
     <ul class="nav nav-flush flex-column mb-auto text-center">
         <li> <a href="{% url 'ordersHistory' %}" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-clock-rotate-left"></i> <br><small>Orders History</small> </a> </li>
-        <li> <a href="{% url 'myDetails' %}" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-user-gear"></i> <br><small>Address</small> </a> </li>
+        <li> <a href="{% url 'shippingAddress' %}" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+        <br><small>Address</small> </a> </li>
         <li> <a href="#" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-file"></i> <small>Payments</small> </a> </li>
         <li> <a href="{% url 'settings' %}" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-gear"></i> <br><small>Settings</small> </a> </li>
         <li> <a href="{% url 'logout' %}" class="nav-link py-3 border-bottom" style="color: grey;"> <i class="fa-solid fa-right-from-bracket" ></i> <br><small>Signout</small> </a> </li>

@@ -1,5 +1,6 @@
 {%extends 'base.html' %}
 {%load static%}
+{% load mathfilters %}
 {%block content%}
 <div class="main-section">
     
@@ -16,26 +17,29 @@
 
                     <div class="user-dashboard loader-holder">
                     
-                            <center><h5 class="text-uppercase">Recent Orders</h5></center><br>
+                            <center><h5 class="text-uppercase">Order Detail</h5></center><br>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="responsive-table">
                                         <table class="table table-hover">
                                             <thead>
                                               <tr>
-                                                <th scope="col">Order number</th>
-                                                <th scope="col">Total to paid</th>
-                                                <th scope="col">Date</th>
-                                                <th scope="col">Information</th>
+                                                <th scope="col">Product ID</th>
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Price</th>
                                               </tr>
                                             </thead>
                                             <tbody>
-                                                {% for order in orders %}
+                                                {% for item in orderdetail %}
                                               <tr>
-                                                <td><span class="badge rounded-pill text-bg-success" style="font-size: 12px; color: white !important;">{{order.id}}</span></td>
-                                                <td>${{ order.total_to_paid }}</td>
-                                                <td>{{ order.ordered_date|date:'Y-m-d H:i'}}</td>
-                                                <td><a href="{% url 'orderDetail' order.id %}" class="btn btn-info">Details</a></td>
+                                                <td>#{{item.id}}</td>
+                                                <td>
+                                                    {{ item.product }}
+                                                    
+                                                </td>
+                                                <td>{{ item.quantity }}</td>
+                                                <td>${{item.price|mul:item.quantity}}</td>
                                               </tr>
                                               {% endfor %}
                                             </tbody>

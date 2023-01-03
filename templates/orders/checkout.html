@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{%load static%}
+{% load mathfilters %}
+{%block content%}
+<style>
+    .field-holder {
+        padding-top: 20px;
+    }
+</style>
+<body>
+<div class="container">
+    <form id="form">
+    <br>
+    <h3>Shipping Info</h3>
+    <hr>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row g-2" style="width: 600px;">
+                <div class="col-md-6">
+                    <div class="form-field">
+                        <label>Name*</label>
+                        <input class="form-control validate" id="name" type="text" autocomplete="off" value="{{address.name}}" required=True>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-field">
+                        <label>Surname*</label>
+                        <input class="form-control validate" id="surname" type="text" autocomplete="off" value="{{address.surname}}" required=True>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-field">
+                        <label>Email*</label>
+                        <input class="form-control validate" id="email" type="email" autocomplete="off" value="{{address.email}}" required=True>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-field">
+                        <label>Country*</label>
+                        <input class="form-control validate" id="country" type="text" autocomplete="off" value="{{address.country}}"required=True>
+                    </div>
+                </div>
+        
+                <div class="col-12">
+                <div class="form-field">
+                    <label>State*</label>
+                    <input class="form-control validate" id="state" type="text" autocomplete="off" value="{{address.state}}" required=True>
+                </div>
+                </div>
+                <div class="col-12">
+                <div class="form-field">
+                    <label>Street*</label>
+                    <input class="form-control validate" id="street" type="text" autocomplete="off" value="{{address.street}}" required=True>
+                </div>
+                </div>
+        
+                <div class="col-md-6">
+                    <div class="form-field">
+                        <label>City*</label>
+                        <input class="form-control validate" id="city" type="text" autocomplete="off" value="{{address.city}}" required=True>
+                    </div>
+                </div>
+        
+                <div class="col-md-6">
+                    <div class="form-field">
+                        <label>Pin code*</label>
+                        <input class="form-control validate" id="pin_code" type="text" autocomplete="off" value="{{address.pin_code}}" required=True>
+                    </div>
+                </div>
+            
+            <br><br><button id="finish-order" type="submit" class="btn btn-primary">Place order</button>
+        </form>
+        </div><br>
+   
+        </div> 
+        
+        
+       
+        <div class="col-lg-4">
+            <div class="card mb-3">
+                <div class="card">
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">CART: 
+                        {% with qty_amount=cart|length %}
+                       
+                          {% if qty_amount > 0 %}
+                      
+                              {{ qty_amount }}
+                              {% else %}
+                                  0
+                          {% endif %}
+                      {% endwith %}</h5><hr>
+                    {%for item in cart %}
+                    {%with product=item.product%}
+                      
+                    
+                      <div class="itemside align-items-center">
+                        <div class="mb-4 border-1">   
+                        <div class="img1" style="width: 25%; height: 25%;">                                
+                                <a href="{{product.get_absolute_url}}">
+                                    <img class="img-fluid" alt="Responsive image" src="{{product.image.url}}">
+                                </a>
+                        </div> 
+                        <small>{{product.name}}<br>
+                        Amount: {{item.qty}}
+                        <span style="float: right; font-weight: 500;">${{product.price|mul:item.qty}}</span></small>
+                        <hr>
+                        </div>
+                    </div>
+                    {%endwith%}
+                    {%endfor%}
+                </div>
+            </div>
+            
+        </div>
+       
+    </div>
+    <br>
+</div>
+</div>
+</body>
+
+<script>
+
+    $(document).on('submit', function(e){
+        e.preventDefault();
+      
+        $.ajax({
+      
+          type: 'POST',
+          url: '{% url 'finish_order' %}', 
+          data: {
+
+                name: $('#name').val(),
+                surname: $('#surname').val(),
+                email: $('#email').val(),
+                country: $('#country').val(),
+                state: $('#state').val(),
+                street: $('#street').val(),
+                city: $('#city').val(),
+                pin_code: $('#pin_code').val(),
+
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post'
+          },
+      
+          success: function(json){
+            
+                window.location.replace("{% url 'payment_success' %}");
+       
+          },
+      
+          error: function(xhr, errmsg, err){
+                window.location.replace("{% url 'payment_failed' %}");
+          }
+        });
+      })
+
+</script>
+
+{%endblock%}

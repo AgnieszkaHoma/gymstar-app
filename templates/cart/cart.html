@@ -12,6 +12,8 @@
             <div class="card">
                 <div class="table-responsive">                   
                     <table class="table table-borderless table-shopping-cart">
+                        {%for item in cart %}
+                        {%with product=item.product%}
                         <thead class="text-muted">
                             <tr class="small text-uppercase">
                                 <th scope="col">Product</th>
@@ -21,15 +23,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {%for item in cart %}
-                            {%with product=item.product%}
+                            
                             <tr>
                                 <td>
                                     <div class="itemside align-items-center">
                                         <div class="mb-4 border-1">   
                                                                    <div class="img1" style="width: 25%; height: 25%;">                                
                                                 <a href="{{product.get_absolute_url}}"><img class="img-fluid" alt="Responsive image"
-                                                        src="{{product.image.url}}" style=" margin-top:-30px;">
+                                                        src="{{product.image.url}}" style="">
                                                 </a>
                                             </div>
                                                 
@@ -61,7 +62,7 @@
                             </tr>
                             {%endwith %}
                             {%empty%}<br>
-                            <center><h3>Shopping cart is empty.</h3></center><br>
+                            <center><h3>There are no products in your cart.</h3></center><br>
                             {%endfor%}
                         </tbody>                     
                     </table>                    
@@ -84,21 +85,21 @@
                         </div>                      
                         <div class="d-flex align-items-center" style="margin-bottom: 15px;">
                             <div class="display">Shipping:</div>
-                            <div class="ml-auto">$9.99</div>
+                            <div class="ml-auto">Free</div>
                         </div> 
                         <div class="d-flex align-items-center" style="margin-bottom: 5px;">
                             <div class="display font-weight-bold">Total:</div>
-                            <div class="ml-auto font-weight-bold">${{cart.total_amount|addition:9.99}}</div>
+                            <div class="ml-auto font-weight-bold">${{cart.total_amount}}</div>
                         </div>                        
                         <hr> 
                         <form>
                             <div class="form-group"> <label>Have coupon?</label>
                                 <div class="input-group"> <input type="text" class="form-control coupon" name="" placeholder="Coupon code">
-                                    <button class="btn btn-primary btn-apply coupon" style="border-radius: 5px; margin-left: 3px;">Apply</button> 
+                                    <button class="btn btn-primary btn-apply coupon" style="border-radius: 12px; margin-left: 3px;">Apply</button> 
                                 </div>
                                 <hr>
                                 <small>
-                                    
+                                    <div class="icons-pay">
                                     <div class="img1" style="display: inline-block; width: 40px; margin: 20px;">
                                         <img src="{% static 'images/visa.png' %}">                                        
                                     </div>                                        
@@ -108,10 +109,11 @@
                                     <div class="img3" style="display: inline-block; width: 45px; margin: 20px;">                                     
                                         <img src="{% static 'images/paypal.png' %}">                                      
                                     </div> 
+                                </div>
                                 </small>
                             </div>
                         </form>
-                        <a href="#" class="btn btn-primary btn-lg btn-block" data-abc="true" style="margin-top: -10px;">Payment</a>
+                        <a href="{% url 'checkout' %}" class="btn btn-primary btn-lg btn-block" data-abc="true" style="margin-top: -10px;">Checkout</a>
                     </div>
                 </div>
             </div>

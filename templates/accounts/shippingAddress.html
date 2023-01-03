@@ -27,46 +27,63 @@
 				<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 					<br /><br />
 
-					<form action="{% url 'myDetails' %}" method="POST">
+					<form method="POST" autocomplete="off">
 						{% csrf_token %}
 						<div class="form-fields-set ">
 							<ul>
 								<li>
 									<div class="row frm-layt">
-										<center><strong><h3>Edit address info:</h3></strong></center><br>
-
+										<strong><h4>Shipping Address: </h4></strong><hr>	
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<div class="field-holder">
 												<label></label>
-												{{profile_form.country| as_crispy_field}}
+												{{form.name| as_crispy_field}}
+											</div>
+										</div>
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<div class="field-holder">
+												<label></label>
+												{{form.surname| as_crispy_field}}
+											</div>
+										</div>				
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<div class="field-holder">
+												<label></label>
+												{{form.email| as_crispy_field}}
+											</div>
+										</div>			
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+											<div class="field-holder">
+												<label></label>
+												{{form.country| as_crispy_field}}
 											</div>
 										</div>
 
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<div class="field-holder">
 												<label></label>
-												{{profile_form.state| as_crispy_field}}
+												{{form.state| as_crispy_field}}
 											</div>
 										</div>
 
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<div class="field-holder">
 												<label></label>
-												{{profile_form.city| as_crispy_field}}
+												{{form.city| as_crispy_field}}
 											</div>
 										</div>
 
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<div class="field-holder">
 												<label></label>
-												{{profile_form.street| as_crispy_field}}
+												{{form.street| as_crispy_field}}
 											</div>
 										</div>
 
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<div class="field-holder">
 												<label></label>
-												{{profile_form.pin_code| as_crispy_field}}
+												{{form.pin_code| as_crispy_field}}
 											</div>
 										</div>
 
@@ -78,7 +95,7 @@
 								
 								<div class="field-holder">
 									<div class="payment-holder input-button-loader" style="margin-left: 32px;">
-										<input type="submit" class="btn btn-primary" value="Update Profile" style="width: 476px;"/>
+										<input type="submit" class="btn btn-primary" value="Save Shipping Info" style="width: 476px;"/>
 									</div>
 								</div>
 								<br />

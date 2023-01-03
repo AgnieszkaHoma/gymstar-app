@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from orders.models import *
 
 class RegisterUserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -19,8 +20,8 @@ class RegisterUserForm(forms.ModelForm):
                 "Password does not match!"
             )
     
-class UserProfileForm(forms.ModelForm):
+class ShippingForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
-        fields = ['street', 'country', 'state', 'city', 'pin_code']
+        model = ShippingAddress
+        fields = ['name', 'surname', 'email', 'street', 'country', 'state', 'city', 'pin_code']
         
