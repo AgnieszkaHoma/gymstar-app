@@ -2,6 +2,11 @@
 {%load static%}
 {% load crispy_forms_tags %}
 {%block content%}
-<div class="container">
-<h5>success</h5>
+<div class="container"><br>
+<center><img src="{% static 'images/success.png' %}" alt="Success" style="max-width:150px;"><br>
+<h4>Transaction Completed Successfully</h4>
+<small>You have completed your payment. Thank you.</small><br><br>
+<a button href="{% url 'home' %}" type="button" class="btn btn-primary btn-rounded btn-lg" style="background-color: #45D6A9;">Back to home</a></center><br>
+
+</div>
 {%endblock%}

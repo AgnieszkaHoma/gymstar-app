@@ -1,67 +1,6 @@
 {% extends 'base.html'%}
 {%load static%}
 
-{% comment %} {%block content%}
-
-<br><p>We have found {{products.count}} items. </p><hr>
-{%for product in products %}
-<div class="container">
-
-    
-    <div class="row">
-        <div class="col-md-3">
-            <!-- Card -->
-<div class="card">
-
-    <!-- Card image -->
-    <div class="view overlay">
-      <img class="card-img-top" src="{{product.image.url}}"
-        alt="Card image cap">
-      <a href="{{product.get_absolute_url}}">
-        <div class="mask rgba-white-slight"></div>
-      </a>
-    </div>
-  
-    <!-- Card content -->
-    <div class="card-body">
-  
-      <!-- Title -->
-      <h4 class="card-title">{{product.name}}</h4>
-      <!-- Text -->
-      <strong><h6>{{product.price}}$</h6></strong>
-      <small>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-            <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-          </svg> (0)
-        <br>
-        <small>3 days delivery</small>
-        </small>
-      <br>
-      <a href="{{ product.get_absolute_url }}" class="btn btn-block btn-primary">See product</a>
-    </div>
-  
-  </div>
-  <!-- Card -->
-        </div>
-    </div>
-</div>
-
-{%endfor%}
-
-{%endblock%} {% endcomment %}
-
 {%block content%}
 
 <style>
@@ -70,52 +9,13 @@
   }
 </style>
 
-{% comment %} <div class="container">
-  
-  <div class="row">
-    
-    <p>We have found {{products.count}} items.</p><hr>
-    
-      {% if not products %}
-      <div class="col">There are currently no products active.</div>
-        {% else %}
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        {% for product in products %}
-        <div class="col-lg-4 d-flex align-items-stretch">
-          <div class="card border-1">          
-            <a href="{{ product.get_absolute_url }}"><img class="card-img-top" style="height: auto; width: 100%;
-            height: 15vw;
-            object-fit: cover;" alt="Responsive image" src="{{ product.image.url }}"></a>      
-            <div class="card-body px-1">
-              <p class="card-text">
-                <a class="text-dark text-decoration-none"
-                  href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-              </p>
-              <div class="fw-bold">{{product.price}}$</div>
-            </div>
-            
-              <small style="padding: 5px;">3 days delivery</small>
-               
-              
-            <a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:10rem;  display: block; margin: 0 auto; margin-top: 10px; ">Check product</a><br>
-         
-          </div>
-          
-        </div>
-        {% endfor %}
-      </div>
-      {% endif %}
-    </div>
-  </div>
-<br> {% endcomment %}
-
 <div class="page-section account-header user-logged-in">
   <div class="container">
       <div class="row">
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <!-- Load the sidebar here -->
               <br><br>
-              <h4><strong>Filter</strong></h4><br>
+              
               <div class="d-flex flex-column flex-shrink-0 " style="width: 150px;">               
 
   <div class="frame">
@@ -161,7 +61,7 @@
                           {%endfor%}
                         </div>
                       </div>
-                    </div>
+                    </div>                 
 
                     <div class="sidebar-widget mt-8">
                       <h5 class="sidebar-title border-bottom">Color</h5>
@@ -186,7 +86,7 @@
               <div class="user-dashboard loader-holder">
                   <div class="user-holder">
 
-                    <br>We have found {{products.count}} items.
+                    <br>We have found {{product_page.count}} items.
                                
 
                     <div class="header-bottom-set-dropdown" style="float: right;">
@@ -194,10 +94,10 @@
                         Sort by
                       </button>
                       <ul class="dropdown-menu dropdown-menu-right" style="border: 1px solid #ccc;">
-                        <li><a class="dropdown-item" href="/store/products/{% for i in products %}?LOWTOHIGH= {{i.id}} {% endfor %}">Price, Low to High</a></li>
-                        <li><a class="dropdown-item" href="/store/products/{% for i in products %}?HIGHTOLOW= {{i.id}} {% endfor %}">Price, High to Low</a></li>
-                        <li><a class="dropdown-item" href="/store/products/{% for i in products %}?ATOZ= {{i.id}} {% endfor %}">Name, A to Z</a></li>
-                        <li><a class="dropdown-item" href="/store/products/{% for i in products %}?ZTOA= {{i.id}} {% endfor %}">Name, Z to A</a></li>
+                        <li><a class="dropdown-item" href="/store/products/{% for i in product_page %}?LOWTOHIGH= {{i.id}} {% endfor %}">Price, Low to High</a></li>
+                        <li><a class="dropdown-item" href="/store/products/{% for i in product_page %}?HIGHTOLOW= {{i.id}} {% endfor %}">Price, High to Low</a></li>
+                        <li><a class="dropdown-item" href="/store/products/{% for i in product_page %}?ATOZ= {{i.id}} {% endfor %}">Name, A to Z</a></li>
+                        <li><a class="dropdown-item" href="/store/products/{% for i in product_page %}?ZTOA= {{i.id}} {% endfor %}">Name, Z to A</a></li>
                       </ul>
                     </div>
                     <hr>
@@ -209,11 +109,11 @@
                       {% else %}
                       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                       {% for product in product_page %}
-                      <div class="col-lg-4 d-flex align-items-stretch">
-                        <div class="mb-4 border-1">          
+                      <div class="col-lg-4 d-flex align-items-stretch border mr-2 ml-2" style="justify-content:center; padding: 10px 10px 10px 10px; border-radius: 5px; width: 311px;">
+                        <div class="mb-1 border-1">          
                           <a href="{{ product.get_absolute_url }}"><div class="bg-image hover-zoom"><img class="img-responsive" style="height: auto; max-width: 100%;
                           height: 15vw;
-                          object-fit: cover; margin-top: 5px;" alt="Responsive image" src="{{ product.image.url }}"></div></a>      
+                          object-fit: cover; margin-top: 5px; padding: 20px;" alt="Responsive image" src="{{ product.image.url }}"></div></a>      
                           <div class="card-body px-1">
                             <p class="card-text">
                               <a class="text-dark text-decoration-none"
@@ -222,10 +122,11 @@
                             <div class="fw-bold">{{product.price}}$</div>
                           </div>
                           
-                            <small style="padding: 5px;">3 days delivery</small>
+                            <small style="padding: 5px;">3 days delivery
+                            <strong style="float: right;">{{product.get_points_avg|floatformat:1}}/5 <i class="fa fa-star" aria-hidden="true" style="color: #f7dc2a;"></i></strong></small><br>
                              
                             
-                          <a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:10rem;  display: block; margin: 0 auto; ">Check product</a><br>
+                          <br><a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:18rem;  display: block; margin: 0 auto; ">Check product</a><br>
                        
                         </div>
                         

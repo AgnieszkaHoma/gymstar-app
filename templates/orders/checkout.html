@@ -9,7 +9,7 @@
 </style>
 <body>
 <div class="container">
-    <form id="form">
+    <form id="form" onsubmit="event.preventDefault();">
     <br>
     <h3>Shipping Info</h3>
     <hr>
@@ -19,56 +19,60 @@
                 <div class="col-md-6">
                     <div class="form-field">
                         <label>Name*</label>
-                        <input class="form-control validate" id="name" type="text" autocomplete="off" value="{{address.name}}" required=True>
+                        <input class="form-control validate" id="name" type="text" value="{{address.name}}" required>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-field">
                         <label>Surname*</label>
-                        <input class="form-control validate" id="surname" type="text" autocomplete="off" value="{{address.surname}}" required=True>
+                        <input class="form-control validate" id="surname" type="text" value="{{address.surname}}" required>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-field">
                         <label>Email*</label>
-                        <input class="form-control validate" id="email" type="email" autocomplete="off" value="{{address.email}}" required=True>
+                        <input class="form-control validate" id="email" type="email" value="{{address.email}}" required>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="form-field">
                         <label>Country*</label>
-                        <input class="form-control validate" id="country" type="text" autocomplete="off" value="{{address.country}}"required=True>
+                        <input class="form-control validate" id="country" type="text" value="{{address.country}}"required>
                     </div>
                 </div>
         
                 <div class="col-12">
                 <div class="form-field">
                     <label>State*</label>
-                    <input class="form-control validate" id="state" type="text" autocomplete="off" value="{{address.state}}" required=True>
+                    <input class="form-control validate" id="state" type="text" value="{{address.state}}" required>
                 </div>
                 </div>
                 <div class="col-12">
                 <div class="form-field">
                     <label>Street*</label>
-                    <input class="form-control validate" id="street" type="text" autocomplete="off" value="{{address.street}}" required=True>
+                    <input class="form-control validate" id="street" type="text" value="{{address.street}}" required>
                 </div>
                 </div>
         
                 <div class="col-md-6">
-                    <div class="form-field">
+                    <div class="form-field mb-3">
                         <label>City*</label>
-                        <input class="form-control validate" id="city" type="text" autocomplete="off" value="{{address.city}}" required=True>
+                        <input class="form-control validate" id="city" type="text" value="{{address.city}}" required>
                     </div>
                 </div>
         
                 <div class="col-md-6">
-                    <div class="form-field">
+                    <div class="form-field mb-3">
                         <label>Pin code*</label>
-                        <input class="form-control validate" id="pin_code" type="text" autocomplete="off" value="{{address.pin_code}}" required=True>
+                        <input class="form-control validate" id="pin_code" type="text" value="{{address.pin_code}}" required>
                     </div>
                 </div>
             
-            <br><br><button id="finish-order" type="submit" class="btn btn-primary">Place order</button>
+            {% comment %} <br><br><button id="finish-order" type="submit" class="btn btn-primary">Place order</button> {% endcomment %}
+
+            <div id="paypal-button-container"></div>
+            <script src="https://www.paypal.com/sdk/js?client-id=AStiV0uuniTsunt2EcWiKehfG9ZfjiKUdZBmNFqslB5U9OJEcbZe7xkmoujo5j-dGsxTjsdegxzjodD2&currency=USD&intent=capture&enable-funding=venmo" data-sdk-integration-source="integrationbuilder"></script>
+
         </form>
         </div><br>
    
@@ -90,14 +94,14 @@
                               {% else %}
                                   0
                           {% endif %}
-                      {% endwith %}</h5><hr>
+                      {% endwith %}</h5>Total: ${{cart.total_amount}}<hr>
                     {%for item in cart %}
                     {%with product=item.product%}
                       
                     
                       <div class="itemside align-items-center">
                         <div class="mb-4 border-1">   
-                        <div class="img1" style="width: 25%; height: 25%;">                                
+                        <div class="img1" style="width: 15%; height: 15%;">                                
                                 <a href="{{product.get_absolute_url}}">
                                     <img class="img-fluid" alt="Responsive image" src="{{product.image.url}}">
                                 </a>
@@ -121,41 +125,149 @@
 </div>
 </body>
 
-<script>
+ <script>
 
-    $(document).on('submit', function(e){
-        e.preventDefault();
-      
-        $.ajax({
-      
-          type: 'POST',
-          url: '{% url 'finish_order' %}', 
-          data: {
+      var total_amount='{{cart.total_amount}}';
 
-                name: $('#name').val(),
-                surname: $('#surname').val(),
-                email: $('#email').val(),
-                country: $('#country').val(),
-                state: $('#state').val(),
-                street: $('#street').val(),
-                city: $('#city').val(),
-                pin_code: $('#pin_code').val(),
+      const paypalButtonsComponent = paypal.Buttons({
+        // optional styling for buttons
+        // https://developer.paypal.com/docs/checkout/standard/customize/buttons-style-guide/
+        style: {
+          color: "gold",
+          shape: "pill",
+          layout: "vertical"
+        },
 
-                csrfmiddlewaretoken: "{{csrf_token}}",
-                action: 'post'
-          },
-      
-          success: function(json){
-            
-                window.location.replace("{% url 'payment_success' %}");
-       
-          },
-      
-          error: function(xhr, errmsg, err){
-                window.location.replace("{% url 'payment_failed' %}");
-          }
+        onInit: function(data, actions) {
+
+            actions.disable();
+               
+
+                document.querySelectorAll('.validate').forEach(item=> {
+                    item.addEventListener('keyup', event => {
+                        var o_checked = 'Yes';
+
+                        function checkInputs() {
+                            $(':input[required]').each(function(){
+                                if ($(this).val() == '') {
+                                    return o_checked = 'No';
+                                }
+                            });
+
+                            return o_checked;
+                        }
+
+                        var isVerified = checkInputs()
+
+                        if(isVerified === 'Yes') {
+                            actions.enable();
+                        }
+                        else {
+                            actions.disable();
+                        }
+
+                    });
         });
-      })
+
+
+        var o_checked = 'Yes';
+
+        function checkInputs() {
+            $(':input[required]').each(function(){
+                if ($(this).val() == '') {
+                    return o_checked = 'No';
+                }
+            });
+
+            return o_checked;
+        }
+
+        var isVerified = checkInputs()
+
+        if(isVerified === 'Yes') {
+            actions.enable();
+        }
+        else {
+            actions.disable();
+        }
+
+    },
+
+        // set up the transaction
+        createOrder: (data, actions) => {
+            // pass in any options from the v2 orders create call:
+            // https://developer.paypal.com/api/orders/v2/#orders-create-request-body
+            const createOrderPayload = {
+                purchase_units: [
+                    {
+                        amount: {
+                            value: total_amount
+                        }
+                    }
+                ]
+            };
+
+            return actions.order.create(createOrderPayload);
+        },
+
+        // finalize the transaction
+        onApprove: (data, actions) => {
+            const captureOrderHandler = (details) => {
+                const payerName = details.payer.name.given_name;
+                console.log('Transaction completed');
+
+                $.ajax({
+      
+                    type: 'POST',
+                    url: '{% url 'finish_order' %}', 
+                    data: {
+          
+                        name: $('#name').val(),
+                        surname: $('#surname').val(),
+                        email: $('#email').val(),
+                        country: $('#country').val(),
+                        state: $('#state').val(),
+                        street: $('#street').val(),
+                        city: $('#city').val(),
+                        pin_code: $('#pin_code').val(),
+        
+                        csrfmiddlewaretoken: "{{csrf_token}}",
+                        action: 'post'
+                    },
+                
+                    success: function(json){
+                      
+                        window.location.replace("{% url 'payment_success' %}");
+                 
+                    },
+                
+                    error: function(xhr, errmsg, err){
+                        window.location.replace("{% url 'payment_failed' %}");
+                    }
+                  });
+
+
+            };
+
+            return actions.order.capture().then(captureOrderHandler);
+        },
+
+        // handle unrecoverable errors
+        onError: (err) => {
+            console.error('An error prevented the buyer from checking out with PayPal');
+        }
+    });
+
+    paypalButtonsComponent
+        .render("#paypal-button-container")
+        .catch((err) => {
+            console.error('PayPal Buttons failed to render');
+        });
+
+
+
+
+
 
 </script>
 

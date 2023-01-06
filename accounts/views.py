@@ -4,6 +4,7 @@ from django.contrib import messages, auth
 from .models import User, UserProfile
 from django.contrib.auth.decorators import login_required
 from orders.models import *
+
  
 # Create your views here.
 
@@ -140,3 +141,4 @@ def deleteAccount(request):
         messages.info(request, 'Account has been deleted.')
         return redirect ('home')
     return render (request, 'accounts/delete.html')
+    

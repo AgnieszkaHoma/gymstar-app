@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse 
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
+from accounts.models import User
+from django.db.models import Avg
 
 # Create your models here.
 class Category(models.Model):
@@ -69,6 +71,8 @@ class Product(models.Model):
     published_at = models.DateTimeField(auto_now_add = True)
     modified_at = models.DateTimeField(auto_now = True)
         
+    def get_points_avg(self):
+      return Review.objects.filter(product=self).aggregate(Avg("points"))["points__avg"] or 0
     class Meta:
        ordering = ('-published_at',)
        
@@ -81,3 +85,11 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
       self.slug = slugify(self.name)
       super(Product, self).save(*args, **kwargs)
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, related_name='reviews', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
+    body = models.TextField(blank=True, null=True)
+    points = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    

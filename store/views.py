@@ -5,6 +5,8 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from datetime import datetime
 from django.core.paginator import Paginator
+from django.shortcuts import redirect
+from django.db.models import Q
 
 
 # Create your views here.
@@ -25,14 +27,13 @@ def category_list(request, slug=None):
 
 
 def allProducts(request):
-    products = Product.objects.filter(is_available=True).order_by('-published_at')
     categories = Category.objects.all()
     price_filter = Price_Filter.objects.all()
     color = Color.objects.all()
     brand = Brand.objects.all()
     size = Size.objects.all()
      
-    p = Paginator(Product.objects.filter(is_available=True).order_by('-published_at'), 9) 
+    p = Paginator(Product.objects.filter(is_available=True).order_by('-published_at'), 15) 
     page = request.GET.get('page')
     product_page = p.get_page(page)
     nums = "c" * product_page.paginator.num_pages
@@ -49,28 +50,27 @@ def allProducts(request):
     HIGHTOLOWID = request.GET.get('HIGHTOLOW')
     
     if CategoryID:
-        products = Product.objects.filter(category=CategoryID)
+        product_page = Product.objects.filter(category=CategoryID)
     elif PriceFilterID:
-        products = Product.objects.filter(price_filter=PriceFilterID)
+        product_page = Product.objects.filter(price_filter=PriceFilterID)
     elif BrandID:
-        products = Product.objects.filter(brand=BrandID)    
+        product_page = Product.objects.filter(brand=BrandID)    
     elif SizeID:
-        products = Product.objects.filter(size=SizeID)   
+        product_page = Product.objects.filter(size=SizeID)   
     elif ColorID:
-        products = Product.objects.filter(color=ColorID)
+        product_page = Product.objects.filter(color=ColorID)
     elif LOWTOHIGHID:
-        products = Product.objects.filter().order_by('price')
+        product_page = Product.objects.filter().order_by('price')
     elif HIGHTOLOWID:
-        products = Product.objects.filter().order_by('-price')
+        product_page = Product.objects.filter().order_by('-price')
     elif ATOZID:
-        products = Product.objects.filter().order_by('name')
+        product_page = Product.objects.filter().order_by('name')
     elif ZTOAID:
-        products = Product.objects.filter().order_by('-name')
+        product_page = Product.objects.filter().order_by('-name')
     else:
-        products = Product.objects.filter(is_available=True)
+        product_page = Product.objects.filter(is_available=True)
         
     context = {
-        'products': products,
         'categories': categories,
         'price_filter': price_filter,
         'color': color, 
@@ -88,6 +88,11 @@ def productInfo(request, slug):
     product.recent_visits = datetime.now()
     product.save()
     
+    if request.method == 'POST' and request.user.is_authenticated:
+        points = request.POST.get('points', 1)
+        body = request.POST.get('body', '')
+        review = Review.objects.create(product=product, user=request.user, points=points, body=body)
+        return redirect('productInfo', slug=slug)
     context = {
         'product': product
     }
@@ -97,6 +102,7 @@ class Search(ListView):
     model = Product
     template_name = 'store/search.html'
     context_object_name = 'searchedProduct'
+
 
     def get_queryset(self):
         query = self.request.GET.get('q')

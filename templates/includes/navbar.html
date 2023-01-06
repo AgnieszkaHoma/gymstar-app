@@ -47,7 +47,7 @@
       <div class="container-fluid">
         <div class="logo">
         <a href="{% url 'home' %}">
-          <img src="{% static 'images/logoc.png' %}" alt="" style="max-width:100px; margin-right: 30px; margin-bottom:5px;">
+          <img src="{% static 'images/logoc.png' %}" alt="Logo" style="max-width:100px; margin-right: 30px; margin-bottom:5px;">
         </a>
       </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,8 +97,10 @@
           {%if user.is_authenticated %}
           <ul class="navbar-nav form-inline ml-3 my-2 my-lg-0">   
             <li class="nav-item">
-
-          </li>   
+              <div class="wishlist">
+                <center><a href="{% url 'wishlist' %}" style="text-decoration: none; color: grey; padding: 5px 20px;"><i class="fa fa-heart" aria-hidden="true"></i></a></center>
+              </div>
+            </li>
             <li class="nav-item">
 
               <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 
@@ -131,7 +133,9 @@
           </ul>
           {%else%}
           <ul class="navbar-nav form-inline ml-3 my-2 my-lg-0">
-            
+            <div class="wishlist">
+              <center><a href="{% url 'wishlist' %}" style="text-decoration: none; color: grey; padding: 5px 20px;"><i class="fa fa-heart" aria-hidden="true"></i></a></center>
+            </div>
             <li class="nav-item">
 
               <a type="button" role="button" href="{% url 'cart' %}" class="btn btn-outline-secondary" style="border-radius: 25px; color: grey; margin-right: 15px; padding: 13px;"> 

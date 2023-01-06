@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'crispy_forms',
     'orders',
+    'wishlist',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -77,6 +78,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'store.views.categories',
                 'cart.context_processors.context_cart',
+                'wishlist.context_processors.context_wishlist',
             ],
         },
     },
@@ -84,6 +86,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gymstar.wsgi.application'
 
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

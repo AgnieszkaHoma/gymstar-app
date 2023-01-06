@@ -64,28 +64,29 @@
                       {% else %}       
                       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         {% for product in searchedProduct %}
-                        <div class="col-lg-4 d-flex align-items-stretch">
-                          <div class="mb-4 border-1">          
-                            <a href="{{ product.get_absolute_url }}"><img class="img-responsive" style="height: auto; max-width: 100%;
-                            height: 15vw;
-                            object-fit: cover; margin-top: 5px;" alt="Responsive image" src="{{ product.image.url }}"></a>      
-                            <div class="card-body px-1">
-                              <p class="card-text">
-                                <a class="text-dark text-decoration-none"
-                                  href="{{ product.get_absolute_url }}">{{ product.name }}</a>
-                              </p>
-                              <div class="fw-bold">{{product.price}}$</div>
-                            </div>
-                            
-                              <small style="padding: 5px;">3 days delivery</small>
-                               
-                              
-                            <a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:10rem;  display: block; margin: 0 auto; ">Check product</a><br>
-                         
+                      <div class="col-lg-4 d-flex align-items-stretch border mr-2 ml-2" style="justify-content:center; padding: 10px 10px 10px 10px; border-radius: 5px; width: 311px;">
+                        <div class="mb-1 border-1">          
+                          <a href="{{ product.get_absolute_url }}"><div class="bg-image hover-zoom"><img class="img-responsive" style="height: auto; max-width: 100%;
+                          height: 15vw;
+                          object-fit: cover; margin-top: 5px; padding: 20px;" alt="Responsive image" src="{{ product.image.url }}"></div></a>      
+                          <div class="card-body px-1">
+                            <p class="card-text">
+                              <a class="text-dark text-decoration-none"
+                                href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                            </p>
+                            <div class="fw-bold">{{product.price}}$</div>
                           </div>
                           
+                            <small style="padding: 5px;">3 days delivery
+                            <strong style="float: right;">{{product.get_points_avg|floatformat:1}}/5 <i class="fa fa-star" aria-hidden="true" style="color: #f7dc2a;"></i></strong></small><br>
+                             
+                            
+                          <br><a href="{{ product.get_absolute_url }}" type="button" class="btn btn-primary" style="width:18rem;  display: block; margin: 0 auto; ">Check product</a><br>
+                       
                         </div>
-                        {% endfor %}
+                        
+                      </div>
+                      {% endfor %}
                     </div>
                     {% endif %}
                   
