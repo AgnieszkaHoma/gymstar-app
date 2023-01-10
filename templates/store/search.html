@@ -10,57 +10,14 @@
   }
 </style>
 
-<div class="page-section account-header user-logged-in">
   <div class="container">
-      <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <!-- Load the sidebar here -->
-              <br><br>
-              <h4><strong>Filter</strong></h4><br>
-             
-              <div class="d-flex flex-column flex-shrink-0 " style="width: 150px;">               
- <ul>
-                <div class="sidebar-widget"> 
-                  <h4 class="sidebar-title">Category</h4></div><br>
-                      <div class="list-group">
-                      <a href="{% url 'products' %}" class="list-group-item list-group-item-action">All</a>                  
-                      {%for category in categories%}
-                      <a href="?categoryID={{category.id}}" class="list-group-item list-group-item-action">{{category.name}}</a>
-                      {%endfor%}
-                    </div>          
-                    
-                    <div class="sidebar-widget mt-8">
-                      <h4 class="sidebar-title">Price Filter</h4><br>
-                      <div class="price-filter">
-                        <div class="price-slider-amount">
-                          {%for p_filter in price_filter%}
-                          <li><a href="#" class="selected-price">{{p_filter.price}}</a></li>
-                          {%endfor%}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="sidebar-widget mt-8">
-                      <h4 class="sidebar-title">Color</h4><br>
-                      <div class="sidebar-widget-color">
-                        <div class="d-flex flex-wrap">
-                          {%for i in color%}
-                          <li><a href="?colorID={{i.id}}" class="colors" style="background-color: {{i.name}}; width: 34px;
-                            height: 34px; border-radius: 50%; border: 1px solid; margin-right: 5px;">col</a></li>
-                          {%endfor%}
-                        </div>
-                      </div>
-                    </div>
-            </div>
-          </div>
-        </ul>
-          <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-              <div class="user-dashboard loader-holder">
-                  <div class="user-holder">                  
-                    <br><p>We have found {{searchedProduct.count}} items.</p><hr><br>
-    
+      <div class="pb-3 h5"> {{category.name | capfirst }} </div>
+           <center><h3>Search results:</h3></center><hr><br>
                     {% if not searchedProduct %}
-                    <div class="col">Sorry, we didn't find this product</div>
+                    <div class="col"><h4>Sorry, we didn't find this product. </h4><br><br><br>
+                      <a button type="button" href="{% url 'products' %}"class="btn btn-secondary btn-lg"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to store</a>
+                    </div>
+                    <br>
                       {% else %}       
                       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                         {% for product in searchedProduct %}
@@ -95,7 +52,6 @@
           </div>
       </div>
   </div>
-</div>
 </div>
 <br>
 <!-- Main Section End -->

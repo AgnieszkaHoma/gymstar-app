@@ -23,11 +23,9 @@
         <strong><h3>{{product.price}}$</h3></strong><br>
         {{product.description|safe}}<br><br>
 
-        <div class="btn-group-toggle" data-toggle="buttons">Size:<br>
-          <label class="btn btn-secondary active">
-            <input type="checkbox" checked autocomplete="off">{{product.size}}
-          </label><br><br>
-        </div>
+        Size:<br>
+        <button type="button" class="btn btn-secondary">{{product.size}}</button>
+        <br><br>
 
                                  
                   <label for="select">Amount</label>                             
@@ -65,7 +63,7 @@
     </div>
 <br><br>
 
-<div class="container mt-5 shadow p-3"><center><h4>Reviews - {{product.get_points_avg|floatformat:1}}/5 <i class="fa fa-star" aria-hidden="true" style="color: #f7dc2a;"></i></h4></center>
+<div class="container mt-5 shadow p-2"><center><h4>Reviews - {{product.get_points_avg|floatformat:1}}/5 <i class="fa fa-star" aria-hidden="true" style="color: #f7dc2a;"></i></h4></center>
 <div class="reviews-wrapper">
   {% for review in product.reviews.all %}
   <div class="bg-white p-2">
@@ -106,9 +104,9 @@
     height: 160px;
     padding: 12px 20px;
     box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    background-color: #f8f9fa;
     font-size: 16px;
     resize: none;" required=True></textarea>
   </div>
@@ -116,13 +114,13 @@
 
 <div class="field">
   <div class="control">
-    <button class="btn btn-success">Add</button>
+    <button class="btn btn-success">Submit review</button>
   </div>
 </div>
 
   </form>
   {%else%}
-  <h5>Log in to add a review.<a href="{% url 'login' %}"> Log in</a></h5>
+  <h5 style="padding: 8px;">Log in to add a review.<a href="{% url 'login' %}"> Log in</a></h5>
   {%endif%}
 </div>
 
@@ -190,7 +188,6 @@ $(document).on('click', '#add-to-wishlist-button', function(e){
     }
   });
 })
-
 
 
 </script>

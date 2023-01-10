@@ -19,7 +19,7 @@ class RegisterUserForm(forms.ModelForm):
             raise forms.ValidationError(
                 "Password does not match!"
             )
-    
+      
 class ShippingForm(forms.ModelForm):
     class Meta:
         model = ShippingAddress

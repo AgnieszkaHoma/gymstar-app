@@ -4,6 +4,11 @@ from django.contrib import messages, auth
 from .models import User, UserProfile
 from django.contrib.auth.decorators import login_required
 from orders.models import *
+from django.urls import reverse_lazy
+from django.db.models.functions import ExtractMonth
+from django.db.models import Count
+import calendar
+
 
  
 # Create your views here.
@@ -40,8 +45,21 @@ def register(request):
 def profile(request):
     
     profile = UserProfile.objects.get(user_id=request.user.id)
+    orders = Order.objects.filter(user=request.user).order_by('-id')
+    order_month = Order.objects.filter(user=request.user).annotate(month=ExtractMonth('ordered_date')).values('month').annotate(count=Count('id')).values('month', 'count')
+    
+    number_of_month = []
+    allOrders = []
+    for o in order_month:
+        number_of_month.append(calendar.month_name[o['month']])
+        allOrders.append(o['count'])
+        
     context = {
         'profile': profile,
+        'orders': orders,
+        'orders_count': orders.count(),
+        'number_of_month': number_of_month,
+        'allOrders': allOrders,
     }
     return render(request, 'accounts/profile.html', context)
 
@@ -61,12 +79,11 @@ def login(request):
             messages.error(request, 'Invalid credentials, try again.')
             return redirect('login')
     return render(request, 'accounts/login.html')
-
 @login_required(login_url='login')
 def logout(request):
     try:
         for key in list(request.session.keys()):
-            if key == 'session-catch': 
+            if key == 'session-catch' or key == 'session-list': 
                 continue
             else:
                 del request.session[key]
@@ -81,7 +98,7 @@ def settings(request):
 
 @login_required(login_url='login')
 def ordersHistory(request):
-    orders = Order.objects.filter(user=request.user).order_by('-id')
+    orders = Order.objects.filter(user=request.user).order_by('-id')   
     context = {'orders': orders}
     return render(request, 'accounts/ordersHistory.html', context)
     
@@ -141,4 +158,5 @@ def deleteAccount(request):
         messages.info(request, 'Account has been deleted.')
         return redirect ('home')
     return render (request, 'accounts/delete.html')
+
     

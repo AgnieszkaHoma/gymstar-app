@@ -22,16 +22,24 @@ class ShippingAddress(models.Model):
 
 class Order(models.Model):
     
+    STATUS_CHOICES = [
+    ('Order placed', 'Order placed'),
+    ('Order accepted for realization', 'Order accepted for realization'),
+    ('Order shipped', 'Order shipped'),
+    ('Completed', 'Completed'),
+]
+    
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=250)
     surname = models.CharField(max_length=250)
     email = models.EmailField(max_length=250)
     shipping_address = models.TextField(max_length=500)
+    status = models.CharField(max_length=60, null=True, choices=STATUS_CHOICES, default='Order placed')
     total_to_paid = models.DecimalField(max_digits=10, decimal_places=2)
     ordered_date = models.DateTimeField(auto_now_add=True, null=True)
     
     def __str__(self):
-        return 'Order - #' + str(self.id)
+        return 'Order number - #' + str(self.id)
     
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, null=True)

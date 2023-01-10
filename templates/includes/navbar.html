@@ -16,7 +16,7 @@
     .search-box input{
       height: 100%;
       width: 100%;
-      border-radius: 25px;
+      border-radius: 25px !important;
       background: white;
       outline-color: none;
       border: none;
@@ -41,7 +41,7 @@
   <center><div class="fast-info" style="background: rgb(37,173,157);
     background: linear-gradient(90deg, rgba(37,173,157,0.9037990196078431) 0%, rgba(167,42,159,1) 35%, rgba(218,34,141,1) 100%); height: 35px; font-size: 16px; color: white; font-weight: bold; letter-spacing: 1px;"><p style="text-align: center;
     vertical-align: middle;
-    line-height: 35px;      ">OFF10 - DISCOUNT COUPON!</p></div></center>
+    line-height: 35px;      "><i class="fa fa-phone" aria-hidden="true"></i> 321-946-7195</p></div></center>
   <div class="container">
   <nav class="navbar navbar-expand-lg bg-white" style="box-shadow: none;">
       <div class="container-fluid">
@@ -111,7 +111,7 @@
                        
                           {% if qty_amount > 0 %}
                       
-                              {{ qty_amount }}
+                          {{ qty_amount }}
                               {% else %}
                                   0
                           {% endif %}

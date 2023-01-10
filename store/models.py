@@ -44,6 +44,7 @@ class Price_Filter(models.Model):
       ('150 to 200', '150 to 200'),
       ('200 to 250', '200 to 250'),
       ('250 to 500', '250 to 500'),
+      ('500+', '500+'),
     )
     price = models.CharField(choices=PRICE_FILTER, max_length=50)
     

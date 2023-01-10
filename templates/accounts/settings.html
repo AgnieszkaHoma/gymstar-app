@@ -11,19 +11,16 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
         <br/><br/>
 <div class="col">
-        <div class="card" style="width: 18rem; ">
-            <div class="card-body">
-                <center><p class="card-text">Change password</p>
-                <button type="button" class="btn btn-primary">Change password</button></center>
-            </div>
-        </div><br>
-        <div class="card" style="width: 18rem; ">
+             <center>
+        <img src="{% static 'images/error.png' %}" alt="Error" style="max-width:170px;"><br>
+        <div class="card" style="width: 25rem;">
         <div class="card-body">
-            <center><p class="card-text">Delete account</p>
-            <a button href="{% url 'delete' %}" type="button" class="btn btn-danger">Delete account</a></center>
+            <p class="card-text">Delete account</p>
+            <a button href="{% url 'delete' %}" type="button" class="btn btn-danger">Delete account</a>
             
         </div>
         </div>
+    </center>
     </div>
     </div>
 </div>

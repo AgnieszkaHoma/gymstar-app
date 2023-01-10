@@ -20,7 +20,8 @@ input,textarea
     margin: auto;
     background-color: white;
     border-radius: 3px;">
-    <h3>Login here</h3>
+    <center><h3>Login here</h3></center>
+    
     
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
@@ -31,7 +32,7 @@ input,textarea
                 margin-top: 10px;
                 font-size: 16px;"
                 >Email</label>
-                <input type="email" name="email" placeholder="Enter your email address">
+                <input type="email" style="width: 330px; height:38px; border: 1px solid #BDBDBD;" name="email" autocomplete="off">
             </div>
         </div>                              
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -40,20 +41,20 @@ input,textarea
                         display: flex;
                         margin-top: 10px;
                         font-size: 16px;">Password</label>
-                        <input type="password" name="password" placeholder="Enter your password">
+                        <input type="password" style="width: 330px; height:38px; border: 1px solid #BDBDBD;" name="password">
                     </div>
                 </div>
                 <input type="submit" value="Submit" style="
-                    width: 200px;
-                    height: 35px;
-                    margin-top: 15px;
-                    border: none;
-                    background-color: #901F93;
-                    color: white;
-                    font-size: 16px;
-                    margin-left: 15px;
+                width: 330px;
+                height: 38px;
+                margin-top: 19px;
+                border: none;
+                background-color: #901F93;
+                color: white;
+                font-size: 16px;
+                margin-left: 15px;
                 ">
-                <p>You don't have an account? <a href="{% url 'register' %}" style="text-decoration: underline;">Sign Up</a></p>
+                <center><p>You don't have an account? <a href="{% url 'register' %}" style="text-decoration: underline;">Sign Up</a></p></center>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         {% if messages %} 

@@ -13,7 +13,8 @@
             <div class="card">
                 <div class="table-responsive">                   
                     <table class="table table-borderless table-shopping-wishlist">
-
+                        {%for item in wishlist %}
+                        {%with product=item.product%}
                         <thead class="text-muted">
                             <tr class="small text-uppercase">
                                 <th scope="col" width="600">Product</th>       
@@ -23,8 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {%for item in wishlist %}
-                            {%with product=item.product%}
+
                             <tr>
                                 <td>
                                     <div class="itemside align-items-center">
@@ -54,7 +54,7 @@
                             </tr>
                             {%endwith %}
                             {%empty%}<br>
-                            <center><h3>There are no products in your cart.</h3></center><br>
+                            <center><h3>Wishlist is empty.</h3></center><br>
                             {%endfor%}
                         </tbody>                     
                     </table>                    

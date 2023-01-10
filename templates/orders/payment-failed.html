@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {%load static%}
+{% load crispy_forms_tags %}
 {%block content%}
-Payment failed!
+<div class="container"><br>
+<center><img src="{% static 'images/error.png' %}" alt="Error" style="max-width:170px;"><br>
+<h4>Payment Failed</h4>
+<small>Ops, something went wrong. Try again.</small><br><br>
+<a button href="{% url 'home' %}" type="button" class="btn btn-primary btn-rounded btn-lg" style="background-color: #E04006;">Back to home</a></center><br>
+
+
+</div>
 {%endblock%}

@@ -137,7 +137,7 @@
 
                     <br>
 
-                    <nav aria-label="Page navigation example">
+                    {% comment %} <nav aria-label="Page navigation example">
                       <ul class="pagination justify-content-center">
 
                         {%if product_page.has_previous %}
@@ -152,7 +152,7 @@
                         {%if product_page.has_next%}
                         <li class="page-item"><a class="page-link" href = "?page={{product_page.next_page_number}}">Next</a></li>
                         <li class="page-item"><a class="page-link" href = "?page={{product_page.paginator.num_pages}}">Last &raquo</a></li>
-                        {%endif%}
+                        {%endif%} {% endcomment %}
 
 
                       </ul>

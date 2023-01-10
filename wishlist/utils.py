@@ -4,10 +4,10 @@ from decimal import Decimal
 class Wishlist():
     def __init__(self, request):
         self.session = request.session
-        wishlist = self.session.get('session-key')
+        wishlist = self.session.get('session-list')
         
-        if 'session-key' not in request.session:
-            wishlist = self.session['session-key'] = {}
+        if 'session-list' not in request.session:
+            wishlist = self.session['session-list'] = {}
         
         self.wishlist = wishlist
         

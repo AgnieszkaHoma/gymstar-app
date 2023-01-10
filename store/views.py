@@ -16,7 +16,7 @@ def categories(request):
 
 def category_list(request, slug=None):
     category = get_object_or_404(Category, slug=slug)   
-    products = Product.objects.filter(category=category)
+    products = Product.objects.filter(category=category, is_available=True).order_by('-published_at')
     
     context = {
         'category': category,
@@ -27,16 +27,17 @@ def category_list(request, slug=None):
 
 
 def allProducts(request):
+    product_page = Product.objects.filter(is_available=True).order_by('-published_at')
     categories = Category.objects.all()
     price_filter = Price_Filter.objects.all()
     color = Color.objects.all()
     brand = Brand.objects.all()
     size = Size.objects.all()
      
-    p = Paginator(Product.objects.filter(is_available=True).order_by('-published_at'), 15) 
-    page = request.GET.get('page')
-    product_page = p.get_page(page)
-    nums = "c" * product_page.paginator.num_pages
+    # p = Paginator(Product.objects.filter(is_available=True).order_by('-published_at'), 15) 
+    # page = request.GET.get('page')
+    # product_page = p.get_page(page)
+    # nums = "c" * product_page.paginator.num_pages
          
     ColorID = request.GET.get('colorID')
     CategoryID = request.GET.get('category')
@@ -77,7 +78,7 @@ def allProducts(request):
         'size': size,
         'brand': brand,
         'product_page': product_page,
-        'nums': nums,
+        # 'nums': nums,
     }
     return render(request, 'store/products.html', context)
 
@@ -91,10 +92,10 @@ def productInfo(request, slug):
     if request.method == 'POST' and request.user.is_authenticated:
         points = request.POST.get('points', 1)
         body = request.POST.get('body', '')
-        review = Review.objects.create(product=product, user=request.user, points=points, body=body)
+        review = Review.objects.create(product=product, user=request.user, points=points, body=body).order_by('-created_at')
         return redirect('productInfo', slug=slug)
     context = {
-        'product': product
+        'product': product,
     }
     return render(request, 'store/productInfo.html', context)
 
@@ -103,12 +104,11 @@ class Search(ListView):
     template_name = 'store/search.html'
     context_object_name = 'searchedProduct'
 
-
     def get_queryset(self):
         query = self.request.GET.get('q')
         
         if not query :
-            query = ""
+            query = "error"
             
         return Product.objects.filter(name__icontains=query).order_by('-published_at')
 

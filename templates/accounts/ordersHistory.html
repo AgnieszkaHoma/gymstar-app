@@ -26,15 +26,17 @@
                                                 <th scope="col">Order number</th>
                                                 <th scope="col">Total to paid</th>
                                                 <th scope="col">Date</th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Information</th>
                                               </tr>
                                             </thead>
                                             <tbody>
                                                 {% for order in orders %}
-                                              <tr>
+                                              <tr>                                             
                                                 <td><span class="badge rounded-pill text-bg-success" style="font-size: 12px; color: white !important;">{{order.id}}</span></td>
                                                 <td>${{ order.total_to_paid }}</td>
                                                 <td>{{ order.ordered_date|date:'Y-m-d H:i'}}</td>
+                                                <td>{{ order.status }}</td>
                                                 <td><a href="{% url 'orderDetail' order.id %}" class="btn btn-info">Details</a></td>
                                               </tr>
                                               {% endfor %}

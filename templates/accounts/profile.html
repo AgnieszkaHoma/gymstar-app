@@ -12,16 +12,46 @@
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
         <br/><br/>
         <h4>Hello, {{user.first_name}}! We are happy to see you!</h4><br>
-        <div class="card" style="width: 25rem; ">
-            <div class="card-body">
-              <p class="card-text"><strong>Logged as</strong>: {{user.username}}<br>
-                <strong>Email</strong>: {{user.email}}
-              </p>
-            </div>
+
+              <p class="card-text"><strong>Logged as</strong>: {{user.username}} ({{user.first_name}} {{user.last_name}})</p>
+              <p class="card-text"><strong>Email</strong>: {{user.email}}</p><hr>
+          <p class="card-text"><strong>Summary of your orders: {{orders_count}} orders</strong></p>
+          <div>
+            <canvas id="myChart"></canvas>
           </div>
+          <br>
+          
+
+
     </div>
 </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+        labels: {{number_of_month|safe}},
+        datasets: [{
+            label: 'Number of orders per month',
+            data: {{allOrders}},
+            borderWidth: 1
+        }]
+        },
+        options: {
+        scales: {
+            y: {
+            beginAtZero: true
+            }
+        }
+        }
+    });
+
+</script>
 
 {%endblock%}

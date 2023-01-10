@@ -1,5 +1,51 @@
 {% load static %}
 
+<style>
+
+  footer p{
+    padding:0;
+    font-size: 0.8em;
+    color: grey;
+    margin: 1em 0;
+    font-size: 1rem;
+}
+footer ul{
+    list-style: none;
+    display: flex;
+    margin: 1em 0; 
+}
+footer ul li a{
+    padding: 1em; 
+    text-decoration: none;
+    color: grey;
+    transition: 100ms;
+}
+footer ul li a:hover{
+    color: #be4dd1;
+}
+
+footer{
+    width: 100%;
+    background: #f0f0f0;
+    color: #fff; 
+    display: grid;
+    place-items: center;
+    padding: 2em; 
+    font-size: 1rem;
+}
+
+/* Sticky Footer Styling */
+body{
+    min-height: 100vh;
+}
+.sticky-footer{
+    position: sticky;
+    top: 100%;
+}
+
+
+</style>
+{% comment %} 
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted">
     <!-- Section: Social media -->
@@ -81,4 +127,16 @@
     </div>
     <!-- Copyright -->
   </footer>
-  <!-- Footer -->
+  <!-- Footer --> {% endcomment %}
+
+  <footer class="sticky-footer">
+    <!-- <h2>Footer Stick to the Bottom</h2> -->
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Wishlist</a></li>
+        <li><a href="#">Cart</a></li>
+        <li><a href="#">Account</a></li>
+    </ul>
+    <p> © Copyright Agnieszka Homa 2023.</p>
+</footer>
