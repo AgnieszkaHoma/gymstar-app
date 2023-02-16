@@ -8,7 +8,7 @@ from django.http import JsonResponse
 def checkout(request):
     if request.user.is_authenticated: 
             try:
-                shipping_address = ShippingAddress.objects.get()
+                shipping_address = ShippingAddress.objects.get(user=request.user.id)
                 context = {'address': shipping_address}
                 return render(request, 'orders/checkout.html', context)
             except:

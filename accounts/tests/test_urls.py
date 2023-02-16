@@ -15,3 +15,4 @@ class TestUrls(SimpleTestCase):
     def test_profile_url_is_working(self):
         url = reverse('profile')
         self.assertEquals(resolve(url).func, profile)
+

@@ -52,8 +52,7 @@ class Price_Filter(models.Model):
       return self.price  
       
 class Product(models.Model):
-
-    
+   
     name = models.CharField(max_length=100) 
     category = models.ForeignKey(Category, related_name= 'product',on_delete=models.CASCADE, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, blank=True)

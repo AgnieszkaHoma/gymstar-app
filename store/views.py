@@ -92,7 +92,7 @@ def productInfo(request, slug):
     if request.method == 'POST' and request.user.is_authenticated:
         points = request.POST.get('points', 1)
         body = request.POST.get('body', '')
-        review = Review.objects.create(product=product, user=request.user, points=points, body=body).order_by('-created_at')
+        review = Review.objects.create(product=product, user=request.user, points=points, body=body)
         return redirect('productInfo', slug=slug)
     context = {
         'product': product,
@@ -110,5 +110,5 @@ class Search(ListView):
         if not query :
             query = "error"
             
-        return Product.objects.filter(name__icontains=query).order_by('-published_at')
+        return Product.objects.filter(name__icontains=query, is_available=True).order_by('-published_at')
 

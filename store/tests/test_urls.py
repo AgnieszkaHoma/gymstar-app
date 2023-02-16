@@ -9,3 +9,6 @@ class TestUrls(SimpleTestCase):
     def test_productinfo_url_is_resolved(self):
         url = reverse('productInfo', args=[3])
         self.assertEquals(resolve(url).func, productInfo)
+        
+        
+        

@@ -5,15 +5,15 @@
 <div class="container">
 <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">	
-        <!-- Load the sidebar here -->		
+        	
         <br><br>
         {% include 'includes/customerSidebar.html' %}				
     </div>
     <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
         <br/><br/>
-        <h4>Hello, {{user.first_name}}! We are happy to see you!</h4><br>
+        <h4>Hello, {{user.first_name| capfirst}}! We are happy to see you!</h4><br>
 
-              <p class="card-text"><strong>Logged as</strong>: {{user.username}} ({{user.first_name}} {{user.last_name}})</p>
+              <p class="card-text"><strong>Logged as</strong>: {{user.username}} ({{user.first_name| capfirst}} {{user.last_name| capfirst}})</p>
               <p class="card-text"><strong>Email</strong>: {{user.email}}</p><hr>
           <p class="card-text"><strong>Summary of your orders: {{orders_count}} orders</strong></p>
           <div>

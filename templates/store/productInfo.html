@@ -21,7 +21,7 @@
         {%if product.stock >= 1%}
         <small style="color: grey;">Available</small><br>
         <strong><h3>{{product.price}}$</h3></strong><br>
-        {{product.description|safe}}<br><br>
+        <p? style="text-align:justify;">{{product.description|safe}}</p?<br><br>
 
         Size:<br>
         <button type="button" class="btn btn-secondary">{{product.size}}</button>
@@ -63,7 +63,7 @@
     </div>
 <br><br>
 
-<div class="container mt-5 shadow p-2"><center><h4>Reviews - {{product.get_points_avg|floatformat:1}}/5 <i class="fa fa-star" aria-hidden="true" style="color: #f7dc2a;"></i></h4></center>
+<div class="container mt-5 shadow p-5"><center><h4>Reviews - {{product.get_points_avg|floatformat:1}}/5 <i class="fa fa-star" aria-hidden="true" style="color: #f7dc2a;"></i></h4></center>
 <div class="reviews-wrapper">
   {% for review in product.reviews.all %}
   <div class="bg-white p-2">
@@ -147,8 +147,6 @@ $(document).on('click', '#add-to-cart-button', function(e){
     },
 
     success: function(json){
-      
-          //console.log(json)
 
           document.getElementById("cart-quantity").textContent = json.qty
     },

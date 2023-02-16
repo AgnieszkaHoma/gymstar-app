@@ -22,3 +22,6 @@ class TestForms(SimpleTestCase):
         form = ShippingForm(data={})
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors), 1)
+        
+        
+        

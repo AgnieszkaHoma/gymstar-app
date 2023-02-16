@@ -9,3 +9,6 @@ class TestModels(TestCase):
     def test_brand_model(self):
         name = Size.objects.create(name='Nike')
         self.assertEqual(str(name), 'Nike')
+        
+        
+        

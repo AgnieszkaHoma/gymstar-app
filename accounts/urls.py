@@ -12,3 +12,4 @@ urlpatterns = [
     path('profile/orderDetail/<int:id>', views.orderDetail, name='orderDetail'),
     path('profile/deleteAccount', views.deleteAccount, name='delete'),
 ]
+
